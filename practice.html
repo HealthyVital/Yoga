@@ -100,7 +100,7 @@
     <a href="practice.html" class="nav-link active">Practice</a>
     <a href="courses.html" class="nav-link">Courses</a>
     <button class="btn-nav" id="nav-btn">Join Free</button>
-    <select class="lang-select" onchange="setLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
+    <select class="lang-select" onchange="setLang(this.value);renderAll()"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" id="ham-btn" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -126,15 +126,15 @@
 
   <!-- CLASSES -->
   <div class="sec-head">
-    <div class="sec-title">Classes</div>
-    <button class="btn-viewall" onclick="toggleViewAll('classes-grid','classes-toggle')">View all</button>
+    <div class="sec-title" data-i18n="sec-classes">Classes</div>
+    <button class="btn-viewall" onclick="toggleViewAll('classes-grid','classes-toggle')" data-i18n="btn-viewall">View all</button>
   </div>
   <div class="card-grid" id="classes-grid"></div>
 
   <!-- SERIES -->
   <div class="sec-head" style="margin-top:48px">
-    <div class="sec-title">Series</div>
-    <button class="btn-viewall" onclick="toggleViewAll('series-grid','series-toggle')">View all</button>
+    <div class="sec-title" data-i18n="sec-series">Series</div>
+    <button class="btn-viewall" onclick="toggleViewAll('series-grid','series-toggle')" data-i18n="btn-viewall">View all</button>
   </div>
   <div class="card-grid" id="series-grid"></div>
 </div>
@@ -233,6 +233,7 @@ function canAccess(item,user){
 function durShort(d){return d.replace(' mins','').replace(' min','')+' MIN';}
 
 function renderClassCard(cls,user){
+  const t=TRANSLATIONS[getLang()]||TRANSLATIONS.en;
   const locked=!canAccess(cls,user);
   const durLabel=durShort(cls.duration);
   const words=cls.title.toUpperCase().replace(/\s*[-–]\s*ALL LEVELS/,'').replace(/\d+\s*MIN\s*/,'').trim();
@@ -244,8 +245,8 @@ function renderClassCard(cls,user){
         <div class="vtname">${words}</div>
         <div class="vlevel">${cls.level}</div>
       </div>
-      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>`:''}
-      ${cls.isFree?'<span class="vfree">FREE</span>':''}
+      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>${t['label-members-only']}</span></div>`:''}
+      ${cls.isFree?`<span class="vfree">${t['label-free']}</span>`:''}
     </div>
     <div class="vinfo">
       <div class="vteacher">${cls.teacher}</div>
@@ -259,12 +260,13 @@ function renderClassCard(cls,user){
 }
 
 function renderSeriesCard(s,user){
+  const t=TRANSLATIONS[getLang()]||TRANSLATIONS.en;
   const locked=!canAccess(s,user);
   return `<div class="vcard" onclick="openSeries(${s.id})">
     <div class="vthumb">
       <img src="${s.thumbnail}" loading="lazy" alt="${s.title}"/>
-      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>`:''}
-      ${s.isFree?'<span class="vfree">FREE</span>':''}
+      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>${t['label-members-only']}</span></div>`:''}
+      ${s.isFree?`<span class="vfree">${t['label-free']}</span>`:''}
     </div>
     <div class="vinfo">
       <div class="vteacher">${s.teacher}</div>
@@ -272,7 +274,7 @@ function renderSeriesCard(s,user){
         <div class="vname">${s.title}</div>
         <button class="vbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,10 22,10"/></svg></button>
       </div>
-      <span class="vbadge">${s.classCount} classes</span>
+      <span class="vbadge">${s.classCount} ${t['sec-classes']||'classes'}</span>
     </div>
   </div>`;
 }
@@ -376,7 +378,7 @@ function toggleViewAll(gridId){
   g.dataset.expanded=isExpanded?'0':'1';
 }
 
-initData();renderAll();updateNav();
+initData();renderAll();updateNav();applyLang();
 </script>
 <footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">

@@ -125,7 +125,7 @@
   <div class="nav-left">
     <a href="practice.html" class="nav-back">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Back
+      <span data-i18n="nav-back">Back</span>
     </a>
     <a href="index.html" class="nav-logo">YOGI KHASHA</a>
   </div>
@@ -133,7 +133,7 @@
     <a href="practice.html" class="nav-link">Practice</a>
     <a href="courses.html" class="nav-link">Courses</a>
     <button class="btn-nav" id="nav-btn">Join Free</button>
-    <select class="lang-select" onchange="setLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
+    <select class="lang-select" onchange="setLang(this.value);updateProgress(getDays());renderBadges(getDays(),getEarned());applyLang()"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -153,8 +153,8 @@
 
 <!-- ── PAGE TITLE ──────────────────────────────────────── -->
 <div class="page-top">
-  <div class="page-heading">Badges</div>
-  <div class="page-sub">Each milestone etched into your body.</div>
+  <div class="page-heading" data-i18n="page-badges">Badges</div>
+  <div class="page-sub" data-i18n="page-badges-sub">Each milestone etched into your body.</div>
 </div>
 
 <!-- ── PROGRESS HERO ───────────────────────────────────── -->
@@ -162,7 +162,7 @@
   <div class="prog-inner">
     <div class="prog-days-block">
       <div class="prog-count" id="prog-count">0</div>
-      <div class="prog-count-label">Days Practiced</div>
+      <div class="prog-count-label" data-i18n="prog-days-label">Days Practiced</div>
     </div>
     <div class="prog-track">
       <div class="prog-next-badge" id="prog-next-badge">Practice 3 more days to unlock your first badge</div>
@@ -175,8 +175,8 @@
       </div>
     </div>
     <div class="prog-actions">
-      <button class="btn-log" id="btn-log" onclick="logToday()">+ Log Today's Practice</button>
-      <div class="already-logged" id="already-logged">✓ Already logged today</div>
+      <button class="btn-log" id="btn-log" onclick="logToday()" data-i18n="btn-log-today">+ Log Today's Practice</button>
+      <div class="already-logged" id="already-logged" data-i18n="already-logged-txt">✓ Already logged today</div>
     </div>
   </div>
 </div>
@@ -184,8 +184,8 @@
 <!-- ── ALL DONE ────────────────────────────────────────── -->
 <div class="all-done" id="all-done" style="margin:24px 32px">
   <div class="all-done-icon">🏆</div>
-  <div class="all-done-title">You Have Mastered the Ancient Five</div>
-  <div class="all-done-sub">365 days of unbroken practice. You carry the ritual in every cell of your body. This is who you are now — and it cannot be taken from you.</div>
+  <div class="all-done-title" data-i18n="all-done-title">You Have Mastered the Ancient Five</div>
+  <div class="all-done-sub" data-i18n="all-done-sub">365 days of unbroken practice. You carry the ritual in every cell of your body. This is who you are now — and it cannot be taken from you.</div>
 </div>
 
 <!-- ── BADGE GRID ──────────────────────────────────────── -->
@@ -322,6 +322,7 @@ function showAlreadyLogged(){
 // ════════════════════════════════════════════════════════
 function updateProgress(days){
   document.getElementById('prog-count').textContent=days;
+  const t=TRANSLATIONS[getLang()]||TRANSLATIONS.en;
   const allEarned=days>=BADGES[BADGES.length-1].days;
   if(allEarned){
     document.getElementById('prog-hero').style.display='none';
@@ -336,11 +337,10 @@ function updateProgress(days){
   const remaining=toDays-days;
   document.getElementById('prog-bar-fill').style.width=pct+'%';
   document.getElementById('prog-next-badge').textContent=remaining===1?
-    'Just 1 more day to unlock "'+next.name+'"!' :
-    remaining+' more days to unlock "'+next.name+'"';
-  document.getElementById('prog-range-from').textContent=fromDays+' days';
-  document.getElementById('prog-range-to').textContent=toDays+' days';
-  // Disable log if already logged today
+    (t['badge-just-one-more']||'Just 1 more day to unlock')+' "'+next.name+'"!' :
+    remaining+' '+(t['badge-more-days-to']||'more days to unlock')+' "'+next.name+'"';
+  document.getElementById('prog-range-from').textContent=fromDays+' '+(t['badge-days']||'days');
+  document.getElementById('prog-range-to').textContent=toDays+' '+(t['badge-days']||'days');
   const log=JSON.parse(localStorage.getItem('yk_practice_log')||'[]');
   if(log.includes(todayKey()))showAlreadyLogged();
 }
@@ -349,6 +349,7 @@ function updateProgress(days){
 //  RENDER BADGES
 // ════════════════════════════════════════════════════════
 function renderBadges(days,earned){
+  const t=TRANSLATIONS[getLang()]||TRANSLATIONS.en;
   const grid=document.getElementById('badges-grid');
   grid.innerHTML=BADGES.map(b=>{
     const isEarned=days>=b.days;
@@ -358,7 +359,7 @@ function renderBadges(days,earned){
 
     return `
     <div class="badge-card ${isEarned?'earned':''}" id="card-${b.id}">
-      <div class="badge-tier" style="color:${b.grad[0]};background:${b.grad[0]}1a">${b.tier}</div>
+      <div class="badge-tier" style="color:${b.grad[0]};background:${b.grad[0]}1a">${t['badge-tier-'+b.tier.toLowerCase()]||b.tier}</div>
       <div class="hex-outer">
         <div class="hex-glow" style="background:${gradCss};opacity:${isEarned?.55:0}"></div>
         <div class="hex ${isEarned?'earned':'locked'}" style="${isEarned?'background:'+gradCss:''}">
@@ -366,19 +367,19 @@ function renderBadges(days,earned){
         </div>
       </div>
       <div class="badge-days-req">${b.days}</div>
-      <div class="badge-days-word">${b.days===365?'days · 1 year':'days'}</div>
+      <div class="badge-days-word">${b.days===365?t['badge-days']+' · 1 year':t['badge-days']}</div>
       <div class="badge-name" style="margin-top:10px">${b.name}</div>
       <div class="badge-tagline">${b.tagline}</div>
       <div class="badge-desc">${b.desc}</div>
       ${isEarned
         ? `<span class="badge-status earned-status">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              Earned
+              ${t['badge-earned']||'Earned'}
            </span>
            ${earnedDate?`<div class="earned-date">${earnedDate}</div>`:''}`
         : `<span class="badge-status locked-status">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              ${remaining} more day${remaining===1?'':'s'}
+              ${remaining} ${t['badge-days']||'days'}
            </span>`
       }
     </div>`;
@@ -430,6 +431,7 @@ const earned=getEarned();
 updateProgress(days);
 renderBadges(days,earned);
 updateNav();
+applyLang();
 </script>
 <footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">
