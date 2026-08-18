@@ -305,7 +305,8 @@
   <div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:6px">15 minutes a day · Cancel anytime</div>
 </div>
 
-<script>document.getElementById('signup-modal').classList.add('on')}
+<script>
+function showSignup(){document.getElementById('signup-modal').classList.add('on')}
 function hideSignup(){document.getElementById('signup-modal').classList.remove('on')}
 document.getElementById('signup-modal').addEventListener('click',function(e){if(e.target===this)hideSignup()});
 function doSignup(){
