@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Practice – Yogi Khasha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--p:#1e3a8a;--pm:#2563eb;--ph:#1e40af;--pl:#dbeafe;--pll:#eff6ff;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--star:#f59e0b;--f:'Open Sans',sans-serif;--nh:64px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);color:var(--txt);background:#fff}
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);border-bottom:1px solid var(--pl);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:var(--nh)}
+    .nav-logo{font-weight:900;font-size:16px;color:var(--p);letter-spacing:.06em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:24px}
+    .nav-link{color:#4b5563;font-weight:500;text-decoration:none;font-size:15px;transition:color .2s}
+    .nav-link:hover,.nav-link.active{color:var(--p);font-weight:700}
+    .btn-nav{background:var(--p);color:#fff;padding:9px 22px;border-radius:9999px;font-weight:600;border:none;cursor:pointer;font-size:14px;font-family:var(--f)}
+    .btn-nav:hover{background:var(--ph)}
+    .ham-wrap{position:relative}
+    .nav-ham{background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center}
+    .ham-drop{display:none;position:absolute;top:calc(100% + 12px);right:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.14);min-width:220px;padding:8px 0;z-index:300}
+    .ham-drop.open{display:block}
+    .ham-item{display:flex;align-items:center;gap:12px;padding:11px 20px;color:var(--txt);text-decoration:none;font-size:15px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;font-family:var(--f);text-align:left}
+    .ham-item:hover{background:var(--pll)}
+    .ham-item svg{flex-shrink:0;color:var(--tg)}
+    .ham-div{height:1px;background:var(--bd);margin:6px 0}
+    /* MAIN */
+    .main{padding:calc(var(--nh) + 32px) 32px 60px;max-width:1200px;margin:0 auto}
+    .page-title{font-size:32px;font-weight:800;color:var(--txt)}
+    .page-sub{font-size:15px;color:var(--tg);margin-top:6px}
+    /* SECTION */
+    .sec-head{display:flex;align-items:center;justify-content:space-between;margin-top:40px;margin-bottom:20px}
+    .sec-title{font-size:22px;font-weight:800;color:var(--txt)}
+    .btn-viewall{border:1px solid var(--bd);background:#fff;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--f);color:var(--txt)}
+    .btn-viewall:hover{background:var(--pll);border-color:var(--pm)}
+    /* CARD GRID */
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+    /* CLASS CARD */
+    .vcard{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--bd);box-shadow:0 1px 6px rgba(0,0,0,.06);cursor:pointer;transition:box-shadow .2s,transform .15s}
+    .vcard:hover{box-shadow:0 6px 20px rgba(0,0,0,.12);transform:translateY(-2px)}
+    .vthumb{position:relative;width:100%;padding-bottom:60%;overflow:hidden}
+    .vthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .vcard:hover .vthumb img{transform:scale(1.04)}
+    .vov{position:absolute;top:0;left:0;padding:10px 12px;z-index:1}
+    .vov::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.55) 0%,transparent 70%);pointer-events:none;border-radius:0}
+    .vdur{position:relative;display:inline-block;background:#1a3660;color:#fff;font-weight:900;font-size:13px;padding:3px 9px;margin-bottom:6px;border-radius:2px}
+    .vtname{position:relative;color:#fff;font-weight:800;font-size:13px;text-transform:uppercase;line-height:1.3;text-shadow:0 1px 3px rgba(0,0,0,.6);max-width:160px}
+    .vlevel{position:relative;color:rgba(255,255,255,.88);font-size:11px;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+    .vlock{position:absolute;inset:0;background:rgba(0,0,0,.48);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff}
+    .vlock svg{opacity:.9}
+    .vlock span{font-size:13px;font-weight:600;opacity:.9}
+    .vfree{position:absolute;top:10px;right:10px;background:#059669;color:#fff;font-weight:700;font-size:11px;padding:3px 9px;border-radius:20px;z-index:2}
+    .vinfo{padding:12px 16px 14px}
+    .vteacher{font-size:12px;color:var(--pm);font-weight:600;margin-bottom:5px}
+    .vrow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+    .vname{font-weight:700;font-size:14px;color:var(--txt);line-height:1.4;flex:1}
+    .vbtn{width:34px;height:34px;border:2px solid var(--bd);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:none;cursor:pointer;color:var(--tg)}
+    .vbtn:hover{border-color:var(--pm);color:var(--pm)}
+    .vbadge{display:inline-block;background:#f3f4f6;border-radius:20px;padding:3px 10px;font-size:12px;color:var(--ts);margin-top:8px}
+    /* SUBSCRIPTION MODAL */
+    .mo{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:20px}
+    .mo.on{display:flex}
+    .mobox{background:#fff;border-radius:20px;max-width:400px;width:100%;overflow:hidden;max-height:95vh;overflow-y:auto}
+    .moimg{position:relative;height:190px;overflow:hidden}
+    .moimg img{width:100%;height:100%;object-fit:cover;object-position:top}
+    .mox{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--f);color:#111;z-index:1}
+    .mobody{padding:24px}
+    .motitle{font-weight:800;font-size:22px;color:var(--p);margin-bottom:18px}
+    .flabel{font-size:13px;font-weight:600;color:var(--ts);margin-bottom:5px;display:block}
+    .finput{width:100%;padding:12px 14px;border:none;background:#f3f4f6;border-radius:10px;font-size:15px;outline:none;color:var(--txt);font-family:var(--f);margin-bottom:16px}
+    .finput:focus{background:#dbeafe}
+    .plan-label{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:10px}
+    .plan-card{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--bd);border-radius:12px;padding:14px 16px;cursor:pointer;margin-bottom:10px;transition:border-color .2s,background .2s}
+    .plan-card:hover,.plan-card.sel{border-color:var(--p);background:var(--pll)}
+    .plan-name{font-weight:800;font-size:17px;color:var(--txt)}
+    .plan-right{text-align:right}
+    .plan-price{font-weight:800;font-size:17px;color:var(--txt)}
+    .plan-trial{font-size:12px;color:var(--tg);margin-top:2px}
+    .btn-trial{width:100%;background:var(--p);color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:16px;border:none;cursor:pointer;font-family:var(--f);margin-top:14px}
+    .btn-trial:hover{background:var(--ph)}
+    .motiny{text-align:center;font-size:12px;color:var(--tg);margin-top:10px}
+    /* LOGIN MODAL */
+    .lmobox{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:32px;max-height:95vh;overflow-y:auto}
+    .lmotitle{font-weight:800;font-size:22px;color:var(--p);margin-bottom:20px}
+    .btn-login-submit{width:100%;background:var(--p);color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:16px;border:none;cursor:pointer;font-family:var(--f);margin-top:6px}
+    .btn-login-submit:hover{background:var(--ph)}
+    .login-switch{text-align:center;font-size:14px;color:var(--tg);margin-top:12px}
+    .login-switch a{color:var(--pm);cursor:pointer;font-weight:600}
+  </style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">YOGI KHASHA</a>
+  <div class="nav-right">
+    <a href="practice.html" class="nav-link active">Practice</a>
+    <a href="courses.html" class="nav-link">Courses</a>
+    <button class="btn-nav" id="nav-btn">Join Free</button>
+    <div class="ham-wrap">
+      <button class="nav-ham" id="ham-btn" onclick="toggleHam(event)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="ham-drop" id="ham-drop">
+        <a href="badges.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19l3-3 3 3"/></svg>Badges</a>
+        <a href="naked-yoga.html" class="ham-item" style="color:#c084fc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C10 2 8 4 8 6.5C8 9 10 10.5 12 11.5C14 10.5 16 9 16 6.5C16 4 14 2 12 2Z"/><path d="M5 22C5 18 8 16 12 16C16 16 19 18 19 22"/></svg>Naked Yoga <span style="background:linear-gradient(135deg,#c084fc,#e879f9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:auto">Premium</span></a>
+        <a href="mailto:info@yoguikhasha.com" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
+        <a href="privacy.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
+        <a href="terms.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
+        <a href="#" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <div class="ham-div"></div>
+        <button class="ham-item" id="ham-login-btn" onclick="handleHamLogin()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg><span id="ham-login-txt">Log In</span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="page-title">Practice</div>
+  <div class="page-sub">Ancient movement practices to restore vitality, mobility, and your body's natural youth.</div>
+
+  <!-- CLASSES -->
+  <div class="sec-head">
+    <div class="sec-title">Classes</div>
+    <button class="btn-viewall" onclick="toggleViewAll('classes-grid','classes-toggle')">View all</button>
+  </div>
+  <div class="card-grid" id="classes-grid"></div>
+
+  <!-- SERIES -->
+  <div class="sec-head" style="margin-top:48px">
+    <div class="sec-title">Series</div>
+    <button class="btn-viewall" onclick="toggleViewAll('series-grid','series-toggle')">View all</button>
+  </div>
+  <div class="card-grid" id="series-grid"></div>
+</div>
+
+<!-- SUBSCRIPTION MODAL -->
+<div class="mo" id="sub-modal">
+  <div class="mobox">
+    <div class="moimg" style="height:150px">
+      <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt="Yogi Khasha"/>
+      <button class="mox" onclick="closeSub()">×</button>
+    </div>
+    <div class="mobody">
+      <div class="motitle">Unlock Full Access</div>
+      <div style="text-align:center;font-size:14px;color:#6b7280;margin:-10px 0 20px">All classes, all series — unlimited.</div>
+      <div class="plan-card sel" id="plan-annual" onclick="selectPlan('annual')">
+        <div>
+          <div class="plan-name">Annual &nbsp;<span style="background:#059669;color:#fff;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;vertical-align:middle">Best Value</span></div>
+          <div style="font-size:12px;color:#374151;margin-top:4px">Less than $19 / month</div>
+        </div>
+        <div class="plan-right">
+          <div class="plan-price">$225</div>
+          <div style="font-size:12px;color:#6b7280">per year</div>
+        </div>
+      </div>
+      <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
+        <div>
+          <div class="plan-name">Monthly</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:4px">Cancel anytime</div>
+        </div>
+        <div class="plan-right">
+          <div class="plan-price">$25</div>
+          <div style="font-size:12px;color:#6b7280">per month</div>
+        </div>
+      </div>
+      <label class="flabel" style="margin-top:8px">Email</label>
+      <input class="finput" type="email" id="sub-email" placeholder="email address"/>
+      <button class="btn-trial" onclick="startTrial()">Get Full Access</button>
+      <div class="motiny">Immediate access. Cancel anytime.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="mo" id="login-modal">
+  <div class="lmobox">
+    <button class="mox" style="position:static;margin-bottom:16px;margin-left:auto;display:flex" onclick="closeLogin()">×</button>
+    <div class="lmotitle" id="login-modal-title">Welcome back</div>
+    <label class="flabel">Email</label>
+    <input class="finput" type="email" id="login-email" placeholder="email address"/>
+    <label class="flabel">Password</label>
+    <input class="finput" type="password" id="login-pass" placeholder="password"/>
+    <button class="btn-login-submit" onclick="doLogin()">Log In</button>
+    <div class="login-switch">Don't have an account? <a onclick="goSignup()">Sign up free</a></div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const DC=[
+  {id:1,title:"15 min Morning Vitality Ritual",teacher:"Yogi Khasha",duration:"15 mins",level:"all levels",thumbnail:"https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=80",isFree:true,desc:"Begin every morning with this 5-movement activation sequence. In just 15 minutes you clear overnight stiffness, spike circulation, and awaken the energy pathways that keep you young. Members consistently report feeling a decade lighter within the first week."},
+  {id:2,title:"20 min Spinal Awakening & Core Reset",teacher:"Yogi Khasha",duration:"20 mins",level:"all levels",thumbnail:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80",isFree:true,desc:"Your spine is the biological clock of your body — keep it young and everything stays young. This 20-minute sequence decompresses each vertebra, reactivates the deep spinal muscles, and restores the natural curves that gravity and age work so hard to flatten."},
+  {id:3,title:"35 min Full Body Youth Sequence",teacher:"Yogi Khasha",duration:"35 mins",level:"all levels",thumbnail:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80",isFree:false,desc:"The complete ancient sequence — five targeted movements that together activate your body's most powerful rejuvenation pathways. Your spine lengthens, your hips open, your hormonal system rebalances, and something almost indefinable shifts: you start feeling light, strong, and vitally alive again."},
+  {id:4,title:"30 min Posture Reboot & Chest Expansion",teacher:"Yogi Khasha",duration:"30 mins",level:"all levels",thumbnail:"https://images.unsplash.com/photo-1588286840104-8957b019727f?w=400&q=80",isFree:false,desc:"Rounded shoulders and a collapsed chest are the most visible signs of a body aging prematurely. This practice reverses the forward-crumple that modern life forces onto your body — opening the chest, lifting the sternum, and restoring the open posture that signals youth to every system inside you."},
+  {id:5,title:"25 min Energy Renewal Flow",teacher:"Yogi Khasha",duration:"25 mins",level:"all levels",thumbnail:"https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=400&q=80",isFree:false,desc:"When afternoon energy crashes, most people reach for caffeine. This 25-minute sequence does something far more lasting: it reactivates the five key energy pathways, clears accumulated tension from the day, and restores a full, clean charge of vitality. No stimulants. Just ancient movement intelligence."},
+  {id:6,title:"40 min Deep Core & Hip Liberation",teacher:"Yogi Khasha",duration:"40 mins",level:"all levels",thumbnail:"https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=400&q=80",isFree:false,desc:"The hips carry decades of unprocessed stress, old injuries, and habitual compression. This deep-release sequence methodically unlocks every layer — restoring the fluid, unrestricted movement that makes walking, climbing, and simply being in your body feel effortless again."}
+];
+const DS=[
+  {id:1,title:"The Ancient Five Daily Practice",teacher:"Yogi Khasha",classCount:7,thumbnail:"https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80",isFree:false,desc:"The foundational 7-class system that introduces the five sacred movements in sequence. Practiced daily, this is the cornerstone of the Yogi Khasha method — and the ritual that members say changed everything."},
+  {id:2,title:"Posture Rebalance in 21 Days",teacher:"Yogi Khasha",classCount:11,thumbnail:"https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&q=80",isFree:false,desc:"A structured 21-day journey to systematically undo decades of postural collapse. By day 21 your spine sits taller, your shoulders sit back naturally, and people around you start asking what changed."},
+  {id:3,title:"Ageless Body Blueprint",teacher:"Yogi Khasha",classCount:9,thumbnail:"https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80",isFree:false,desc:"The complete movement map for a body that defies its age. Nine sessions covering every key system — spinal health, hormonal balance, hip mobility, and energy flow — showing you exactly how to maintain youthful function for life."},
+  {id:4,title:"Morning Awakening Flow",teacher:"Yogi Khasha",classCount:11,thumbnail:"https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=400&q=80",isFree:false,desc:"11 progressive morning sessions that transform you from someone who dreads getting out of bed into someone who rises with genuine physical energy and ease. The difference between aging and ageless living is often decided in the first 20 minutes of your day."},
+  {id:5,title:"Deep Release & Renewal",teacher:"Yogi Khasha",classCount:5,thumbnail:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80",isFree:false,desc:"Five slow, intentional sessions dedicated to melting away what the years have layered in — the tightness, compression, and quiet tension that steals your range of motion and makes everything feel harder than it should. A reset at the deepest level."},
+  {id:6,title:"Strength & Stamina Series",teacher:"Yogi Khasha",classCount:21,thumbnail:"https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=400&q=80",isFree:false,desc:"21 progressive sessions that rebuild the functional strength and stamina that keep you living fully — the kind that shows up when you carry groceries, take the stairs, and move through your life with ease and confidence, regardless of what the calendar says."}
+];
+
+function initData(){
+  if(!localStorage.getItem('yk_init_v3')){
+    localStorage.setItem('yk_classes',JSON.stringify(DC));
+    localStorage.setItem('yk_series',JSON.stringify(DS));
+    localStorage.setItem('yk_init_v3','1');
+  }
+}
+function getClasses(){try{return JSON.parse(localStorage.getItem('yk_classes'))||DC;}catch(e){return DC;}}
+function getSeries(){try{return JSON.parse(localStorage.getItem('yk_series'))||DS;}catch(e){return DS;}}
+function getUser(){try{return JSON.parse(localStorage.getItem('yk_user'));}catch(e){return null;}}
+function canAccess(item,user){
+  if(user&&user.isPremium)return true;
+  if(item.isFree&&user){
+    if(!user.joinedAt)return true;
+    return(Date.now()-user.joinedAt)/86400000<=7;
+  }
+  return false;
+}
+
+/* ── RENDER ── */
+function durShort(d){return d.replace(' mins','').replace(' min','')+' MIN';}
+
+function renderClassCard(cls,user){
+  const locked=!canAccess(cls,user);
+  const durLabel=durShort(cls.duration);
+  const words=cls.title.toUpperCase().replace(/\s*[-–]\s*ALL LEVELS/,'').replace(/\d+\s*MIN\s*/,'').trim();
+  return `<div class="vcard" onclick="openClass(${cls.id})">
+    <div class="vthumb">
+      <img src="${cls.thumbnail}" loading="lazy" alt="${cls.title}"/>
+      <div class="vov">
+        <span class="vdur">${durLabel}</span>
+        <div class="vtname">${words}</div>
+        <div class="vlevel">${cls.level}</div>
+      </div>
+      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>`:''}
+      ${cls.isFree?'<span class="vfree">FREE</span>':''}
+    </div>
+    <div class="vinfo">
+      <div class="vteacher">${cls.teacher}</div>
+      <div class="vrow">
+        <div class="vname">${cls.title}</div>
+        <button class="vbtn">${locked?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>'}</button>
+      </div>
+      <span class="vbadge">${cls.duration}</span>
+    </div>
+  </div>`;
+}
+
+function renderSeriesCard(s,user){
+  const locked=!canAccess(s,user);
+  return `<div class="vcard" onclick="openSeries(${s.id})">
+    <div class="vthumb">
+      <img src="${s.thumbnail}" loading="lazy" alt="${s.title}"/>
+      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>`:''}
+      ${s.isFree?'<span class="vfree">FREE</span>':''}
+    </div>
+    <div class="vinfo">
+      <div class="vteacher">${s.teacher}</div>
+      <div class="vrow">
+        <div class="vname">${s.title}</div>
+        <button class="vbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,10 22,10"/></svg></button>
+      </div>
+      <span class="vbadge">${s.classCount} classes</span>
+    </div>
+  </div>`;
+}
+
+function renderAll(){
+  const user=getUser();
+  const classes=getClasses();
+  const series=getSeries();
+  document.getElementById('classes-grid').innerHTML=classes.map(c=>renderClassCard(c,user)).join('');
+  document.getElementById('series-grid').innerHTML=series.map(s=>renderSeriesCard(s,user)).join('');
+}
+
+/* ── NAVIGATION ── */
+function openClass(id){
+  const user=getUser();
+  const cls=getClasses().find(c=>c.id===id);
+  if(!cls)return;
+  if(!canAccess(cls,user)){goToPremium();return;}
+  window.location.href='video.html?id='+id+'&type=class';
+}
+function openSeries(id){
+  const user=getUser();
+  const s=getSeries().find(x=>x.id===id);
+  if(!s)return;
+  if(!canAccess(s,user)){goToPremium();return;}
+  alert('Series: '+s.title+'\nThis would open the series player.');
+}
+
+/* ── PREMIUM REDIRECT ── */
+function goToPremium(){
+  const u=getUser();
+  if(u)document.getElementById('sub-email').value=u.email||'';
+  document.getElementById('sub-modal').classList.add('on');
+}
+
+/* ── SUBSCRIPTION MODAL ── */
+let selPlan='annual';
+function openSub(){
+  const u=getUser();
+  if(u)document.getElementById('sub-email').value=u.email||'';
+  document.getElementById('sub-modal').classList.add('on');
+}
+function closeSub(){document.getElementById('sub-modal').classList.remove('on')}
+function selectPlan(p){
+  selPlan=p;
+  document.getElementById('plan-annual').classList.toggle('sel',p==='annual');
+  document.getElementById('plan-monthly').classList.toggle('sel',p==='monthly');
+}
+function startTrial(){
+  const email=document.getElementById('sub-email').value.trim();
+  if(!email){document.getElementById('sub-email').focus();return;}
+  localStorage.setItem('yk_pending',JSON.stringify({email,plan:selPlan}));
+  window.location.href='payment.html?plan='+selPlan+'&email='+encodeURIComponent(email);
+}
+document.getElementById('sub-modal').addEventListener('click',function(e){if(e.target===this)closeSub()});
+
+/* ── HAMBURGER ── */
+function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
+document.addEventListener('click',function(){document.getElementById('ham-drop').classList.remove('open')});
+
+/* ── LOGIN ── */
+function handleHamLogin(){
+  const u=getUser();
+  if(u){localStorage.removeItem('yk_user');location.reload();}
+  else{document.getElementById('ham-drop').classList.remove('open');document.getElementById('login-modal').classList.add('on');}
+}
+function closeLogin(){document.getElementById('login-modal').classList.remove('on')}
+function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value.trim();
+  if(!email||!pass){alert('Please fill in all fields.');return;}
+  // In production: verify against backend. For demo, accept any credentials.
+  localStorage.setItem('yk_user',JSON.stringify({firstName:email.split('@')[0],email,isPremium:false}));
+  closeLogin();location.reload();
+}
+function goSignup(){closeLogin();window.location.href='index.html';}
+document.getElementById('login-modal').addEventListener('click',function(e){if(e.target===this)closeLogin()});
+
+/* ── NAV BUTTON ── */
+function updateNav(){
+  const u=getUser();
+  const btn=document.getElementById('nav-btn');
+  const loginTxt=document.getElementById('ham-login-txt');
+  if(u){
+    btn.textContent=u.firstName||'My Account';
+    btn.onclick=()=>{if(confirm('Log out?')){localStorage.removeItem('yk_user');location.reload();}};
+    if(loginTxt)loginTxt.textContent='Log Out';
+  }else{
+    btn.textContent='Join Free';
+    btn.onclick=()=>window.location.href='index.html#signup';
+    if(loginTxt)loginTxt.textContent='Log In';
+  }
+}
+
+function toggleViewAll(gridId){
+  const g=document.getElementById(gridId);
+  if(!g)return;
+  const cards=g.querySelectorAll('.vcard');
+  const isExpanded=g.dataset.expanded==='1';
+  cards.forEach((c,i)=>{if(i>=6)c.style.display=isExpanded?'none':'';});
+  g.dataset.expanded=isExpanded?'0':'1';
+}
+
+initData();renderAll();updateNav();
+</script>
+<footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Powered by Yogi Khasha</div>
+    <div style="font-size:12px;opacity:.7;margin-bottom:14px">All content © 2026 © Multi Yoga Style &nbsp;·&nbsp; All rights reserved.</div>
+    <div style="display:flex;gap:28px;justify-content:center;font-size:14px">
+      <a href="mailto:info@yogikhasha.com" style="color:#93c5fd;text-decoration:none">Support</a>
+      <a href="terms.html" style="color:#93c5fd;text-decoration:none">Terms</a>
+      <a href="privacy.html" style="color:#93c5fd;text-decoration:none">Privacy</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
