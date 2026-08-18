@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Course – Yogi Khasha</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <script src="lang.js"></script>
   <style>
+    .lang-select{background:transparent;border:1.5px solid var(--p);color:var(--p);padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;outline:none}
     :root{--p:#1e3a8a;--pm:#2563eb;--ph:#1e40af;--pl:#dbeafe;--pll:#eff6ff;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--f:'Open Sans',sans-serif;--nh:64px}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:var(--f);color:var(--txt);background:#fff}
@@ -88,6 +90,7 @@
     <a href="practice.html" class="nav-link">Practice</a>
     <a href="courses.html" class="nav-link">Courses</a>
     <button class="btn-nav" id="nav-btn">Join Free</button>
+    <select class="lang-select" onchange="setLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -116,7 +119,7 @@
 
 <script>
 const FULL_COURSES=[
-  {id:1,title:"Posture Revival Blueprint",teacher:"Yogi Khasha",price:50,
+  {id:1,title:"Posture Revival Blueprint",teacher:"Yogi Khasha",price:25,
    thumbnail:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?w=600&q=80",
    desc:"Three intensive sessions targeting the root cause of most physical aging: postural collapse. You will learn the precise movements to decompress the spine, reactivate dormant muscles, and restore the upright alignment your body was designed to hold — eliminating pain and adding visible years of youth to the way you stand, walk, and move. Each session is designed for home practice and requires no equipment.",
    modules:[
@@ -131,7 +134,7 @@ const FULL_COURSES=[
        {id:6,title:"Posture Integration",duration:"41 mins",thumbnail:"https://images.unsplash.com/photo-1540206395-68808572332f?w=120&q=80"}
      ]}
   ]},
-  {id:2,title:"The 5-Week Vitality Reset",teacher:"Yogi Khasha",price:65,
+  {id:2,title:"The 5-Week Vitality Reset",teacher:"Yogi Khasha",price:33,
    thumbnail:"https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80",
    desc:"The most complete transformation in the Yogi Khasha library. Over five weeks, you will systematically restore every dimension of your physical youth — circulation, stamina, spinal flexibility, hormonal vitality, and energy flow. Built on the same five movement principles practiced in ancient traditions for centuries, now adapted for the modern body and modern life.",
    modules:[
@@ -145,7 +148,7 @@ const FULL_COURSES=[
        {id:5,title:"Rest & Recovery Practice",duration:"22 mins",thumbnail:"https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=120&q=80"}
      ]}
   ]},
-  {id:3,title:"Spinal Youth Program",teacher:"Yogi Khasha",price:45,
+  {id:3,title:"Spinal Youth Program",teacher:"Yogi Khasha",price:23,
    thumbnail:"https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=600&q=80",
    desc:"The spine doesn't just support your body — it IS your body's age. A supple, decompressed spine radiates youth outward to every limb, organ, and system. This targeted program gives you a complete spinal maintenance toolkit: how to decompress it daily, how to rebuild its strength, and how to keep it feeling effortlessly young for the rest of your life.",
    modules:[
@@ -180,8 +183,8 @@ function render(){
     <div class="course-teacher">By ${course.teacher}</div>
     <div class="course-img"><img src="${course.thumbnail}" alt="${course.title}" loading="lazy"/></div>
     <p class="course-desc">${course.desc}</p>
-    <button class="btn-buy" onclick="buyNow()">Buy Now ($${course.price})</button>
-    <p class="buy-hint">Instant access · No subscription required</p>`;
+    <button class="btn-buy" onclick="buyNow()">Buy Now (€${course.price})</button>
+    <p class="buy-hint" data-i18n="lbl-instant-access">Instant access · No subscription required</p>`;
 
   const modulesHtml=course.modules.map(m=>`
     <div class="module">

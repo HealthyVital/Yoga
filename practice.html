@@ -6,7 +6,9 @@
   <title>Practice – Yogi Khasha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <script src="lang.js"></script>
   <style>
+    .lang-select{background:transparent;border:1.5px solid var(--p);color:var(--p);padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;outline:none}
     :root{--p:#1e3a8a;--pm:#2563eb;--ph:#1e40af;--pl:#dbeafe;--pll:#eff6ff;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--star:#f59e0b;--f:'Open Sans',sans-serif;--nh:64px}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:var(--f);color:var(--txt);background:#fff}
@@ -98,6 +100,7 @@
     <a href="practice.html" class="nav-link active">Practice</a>
     <a href="courses.html" class="nav-link">Courses</a>
     <button class="btn-nav" id="nav-btn">Join Free</button>
+    <select class="lang-select" onchange="setLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" id="ham-btn" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -118,8 +121,8 @@
 
 <!-- MAIN -->
 <div class="main">
-  <div class="page-title">Practice</div>
-  <div class="page-sub">Ancient movement practices to restore vitality, mobility, and your body's natural youth.</div>
+  <div class="page-title" data-i18n="page-practice">Practice</div>
+  <div class="page-sub" data-i18n="page-practice-sub">Ancient movement practices to restore vitality, mobility, and your body's natural youth.</div>
 
   <!-- CLASSES -->
   <div class="sec-head">
@@ -144,32 +147,32 @@
       <button class="mox" onclick="closeSub()">×</button>
     </div>
     <div class="mobody">
-      <div class="motitle">Unlock Full Access</div>
-      <div style="text-align:center;font-size:14px;color:#6b7280;margin:-10px 0 20px">All classes, all series — unlimited.</div>
+      <div class="motitle" data-i18n="modal-unlock-title">Unlock Full Access</div>
+      <div style="text-align:center;font-size:14px;color:#6b7280;margin:-10px 0 20px" data-i18n="modal-unlock-sub">All classes, all series — unlimited.</div>
       <div class="plan-card sel" id="plan-annual" onclick="selectPlan('annual')">
         <div>
-          <div class="plan-name">Annual &nbsp;<span style="background:#059669;color:#fff;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;vertical-align:middle">Best Value</span></div>
-          <div style="font-size:12px;color:#374151;margin-top:4px">Less than $19 / month</div>
+          <div class="plan-name"><span data-i18n="plan-annual">Annual</span> &nbsp;<span style="background:#059669;color:#fff;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;vertical-align:middle" data-i18n="plan-best-value">Best Value</span></div>
+          <div style="font-size:12px;color:#374151;margin-top:4px" data-i18n="plan-annual-sub">Less than €8 / month</div>
         </div>
         <div class="plan-right">
-          <div class="plan-price">$225</div>
-          <div style="font-size:12px;color:#6b7280">per year</div>
+          <div class="plan-price">€120</div>
+          <div style="font-size:12px;color:#6b7280" data-i18n="plan-annual-cycle">per year</div>
         </div>
       </div>
       <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
         <div>
-          <div class="plan-name">Monthly</div>
-          <div style="font-size:12px;color:#6b7280;margin-top:4px">Cancel anytime</div>
+          <div class="plan-name" data-i18n="plan-monthly">Monthly</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:4px" data-i18n="plan-monthly-sub">Cancel anytime</div>
         </div>
         <div class="plan-right">
-          <div class="plan-price">$25</div>
-          <div style="font-size:12px;color:#6b7280">per month</div>
+          <div class="plan-price">€15</div>
+          <div style="font-size:12px;color:#6b7280" data-i18n="plan-monthly-cycle">per month</div>
         </div>
       </div>
-      <label class="flabel" style="margin-top:8px">Email</label>
-      <input class="finput" type="email" id="sub-email" placeholder="email address"/>
-      <button class="btn-trial" onclick="startTrial()">Get Full Access</button>
-      <div class="motiny">Immediate access. Cancel anytime.</div>
+      <label class="flabel" style="margin-top:8px" data-i18n="modal-email">Email</label>
+      <input class="finput" type="email" id="sub-email" placeholder="email address" data-i18n-ph="modal-email-ph"/>
+      <button class="btn-trial" onclick="startTrial()" data-i18n="btn-get-access">Get Full Access</button>
+      <div class="motiny" data-i18n="modal-tiny">Immediate access. Cancel anytime.</div>
     </div>
   </div>
 </div>

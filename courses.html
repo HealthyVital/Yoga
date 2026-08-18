@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Courses – Yogi Khasha</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <script src="lang.js"></script>
   <style>
+    .lang-select{background:transparent;border:1.5px solid var(--p);color:var(--p);padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;outline:none}
     :root{--p:#1e3a8a;--pm:#2563eb;--ph:#1e40af;--pl:#dbeafe;--pll:#eff6ff;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--f:'Open Sans',sans-serif;--nh:64px}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:var(--f);color:var(--txt);background:#fff}
@@ -73,6 +75,7 @@
     <a href="practice.html" class="nav-link">Practice</a>
     <a href="courses.html" class="nav-link active">Courses</a>
     <button class="btn-nav" id="nav-btn">Join Free</button>
+    <select class="lang-select" onchange="setLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" id="ham-btn" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -92,8 +95,8 @@
 </nav>
 
 <div class="main">
-  <div class="page-title">Courses</div>
-  <div class="page-sub">Intensive programs built on ancient movement science — designed to return your body to its most vital, capable self.</div>
+  <div class="page-title" data-i18n="page-courses">Courses</div>
+  <div class="page-sub" data-i18n="page-courses-sub">Intensive programs built on ancient movement science — designed to return your body to its most vital, capable self.</div>
   <div class="card-grid" id="courses-grid"></div>
 </div>
 
@@ -105,29 +108,29 @@
       <button class="mox" onclick="closeSub()">×</button>
     </div>
     <div class="mobody">
-      <div class="motitle">Unlock Yogi Khasha</div>
-      <label class="flabel">Email</label>
-      <input class="finput" type="email" id="sub-email" placeholder="email address"/>
+      <div class="motitle" data-i18n="modal-unlock-title">Unlock Yogi Khasha</div>
+      <label class="flabel" data-i18n="modal-email">Email</label>
+      <input class="finput" type="email" id="sub-email" placeholder="email address" data-i18n-ph="modal-email-ph"/>
       <div class="plan-label">Choose Your Plan:</div>
       <div class="plan-card sel" id="plan-annual" onclick="selectPlan('annual')">
-        <div class="plan-name">Annual</div>
-        <div class="plan-right"><div class="plan-price">$225 / year</div></div>
+        <div class="plan-name"><span data-i18n="plan-annual">Annual</span> <span style="background:#059669;color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:700;margin-left:6px" data-i18n="plan-best-value">Best Value</span></div>
+        <div class="plan-right"><div class="plan-price">€120 / <span data-i18n="plan-annual-cycle">year</span></div></div>
       </div>
       <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
-        <div class="plan-name">Monthly</div>
-        <div class="plan-right"><div class="plan-price">$25 / month</div></div>
+        <div class="plan-name" data-i18n="plan-monthly">Monthly</div>
+        <div class="plan-right"><div class="plan-price">€15 / <span data-i18n="plan-monthly-cycle">month</span></div></div>
       </div>
-      <button class="btn-trial" onclick="startTrial()">Get Access Now</button>
-      <div class="motiny">Cancel anytime. Immediate full access.</div>
+      <button class="btn-trial" onclick="startTrial()" data-i18n="btn-get-access">Get Access Now</button>
+      <div class="motiny" data-i18n="modal-tiny">Cancel anytime. Immediate full access.</div>
     </div>
   </div>
 </div>
 
 <script>
 const COURSES=[
-  {id:1,title:"Posture Revival Blueprint",teacher:"Yogi Khasha",price:50,thumbnail:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?w=400&q=80",desc:"Three intensive sessions targeting the root cause of most physical aging: postural collapse. You will learn the precise movements to decompress the spine, reactivate dormant muscles, and restore the upright alignment your body was designed to hold — eliminating pain and adding visible years of youth to the way you stand, walk, and move."},
-  {id:2,title:"The 5-Week Vitality Reset",teacher:"Yogi Khasha",price:65,thumbnail:"https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=80",desc:"The most complete transformation in the Yogi Khasha library. Over five weeks, restore every dimension of your physical youth: circulation, stamina, spinal flexibility, hormonal vitality, and energy flow. Built on the same five movement principles practiced in ancient traditions for centuries — adapted for the modern body and modern life."},
-  {id:3,title:"Spinal Youth Program",teacher:"Yogi Khasha",price:45,thumbnail:"https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=400&q=80",desc:"The spine doesn't just support your body — it IS your body's age. A supple, decompressed spine radiates youth outward to every limb, organ, and system. This targeted program gives you a complete spinal maintenance toolkit: how to decompress it daily, how to rebuild its strength, and how to keep it feeling effortlessly young for the rest of your life."}
+  {id:1,title:"Posture Revival Blueprint",teacher:"Yogi Khasha",price:25,thumbnail:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?w=400&q=80",desc:"Three intensive sessions targeting the root cause of most physical aging: postural collapse. You will learn the precise movements to decompress the spine, reactivate dormant muscles, and restore the upright alignment your body was designed to hold — eliminating pain and adding visible years of youth to the way you stand, walk, and move."},
+  {id:2,title:"The 5-Week Vitality Reset",teacher:"Yogi Khasha",price:33,thumbnail:"https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=80",desc:"The most complete transformation in the Yogi Khasha library. Over five weeks, restore every dimension of your physical youth: circulation, stamina, spinal flexibility, hormonal vitality, and energy flow. Built on the same five movement principles practiced in ancient traditions for centuries — adapted for the modern body and modern life."},
+  {id:3,title:"Spinal Youth Program",teacher:"Yogi Khasha",price:23,thumbnail:"https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=400&q=80",desc:"The spine doesn't just support your body — it IS your body's age. A supple, decompressed spine radiates youth outward to every limb, organ, and system. This targeted program gives you a complete spinal maintenance toolkit: how to decompress it daily, how to rebuild its strength, and how to keep it feeling effortlessly young for the rest of your life."}
 ];
 
 function getUser(){try{return JSON.parse(localStorage.getItem('yk_user'));}catch(e){return null;}}
@@ -141,14 +144,14 @@ function renderCourses(){
     <div class="ccard" onclick="openCourse(${c.id})">
       <div class="cthumb">
         <img src="${c.thumbnail}" loading="lazy" alt="${c.title}"/>
-        <div class="cprice-badge">$${c.price}</div>
+        <div class="cprice-badge">€${c.price}</div>
       </div>
       <div class="cbody">
         <div class="cteacher">${c.teacher}</div>
         <div class="ctitle">${c.title}</div>
         <div class="cdesc">${c.desc}</div>
         <div class="cfoot">
-          <div class="cprice">$${c.price}</div>
+          <div class="cprice">€${c.price}</div>
           <button class="btn-view">View Course</button>
         </div>
       </div>

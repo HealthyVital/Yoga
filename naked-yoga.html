@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Naked Yoga – Yogi Khasha</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <script src="lang.js"></script>
   <!--
     CONTENT PROTECTION NOTE
     ───────────────────────
@@ -237,6 +238,7 @@
     <a href="practice.html" class="nav-link">Practice</a>
     <a href="courses.html" class="nav-link">Courses</a>
     <button class="btn-nav" id="nav-btn">Join Free</button>
+    <select class="lang-select" onchange="setLang(this.value)" style="background:transparent;border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;outline:none"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -305,9 +307,9 @@
     <li class="gate-perk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Deeper body awareness, heightened presence, and richer sensory feedback in every posture</li>
     <li class="gate-perk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Dissolves self-judgment and cultivates genuine body acceptance and self-confidence</li>
     <li class="gate-perk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>6+ exclusive sessions — a growing library of guided naked yoga practices</li>
-    <li class="gate-perk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Completely separate from standard membership · Annual only · $225/year · 30-day guarantee</li>
+    <li class="gate-perk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Completely separate from standard membership · Annual only · €120/year · 30-day guarantee</li>
   </ul>
-  <button class="btn-gate" onclick="openSub()">Get Annual Access — $225/year</button>
+  <button class="btn-gate" onclick="openSub()">Get Annual Access — €120/year</button>
   <div class="gate-hint">Already a member? <a href="#" onclick="openLogin()" style="color:var(--acc);text-decoration:none">Log in here</a></div>
 </div>
 
@@ -354,7 +356,7 @@
       </div>
       <div class="plan-card sel" id="plan-annual">
         <div class="plan-name">Annual Membership</div>
-        <div class="plan-right"><div class="plan-price">$225/yr</div><div class="plan-trial">Naked Yoga included · 30-day guarantee</div></div>
+        <div class="plan-right"><div class="plan-price">€120/yr</div><div class="plan-trial">Naked Yoga included · 30-day guarantee</div></div>
       </div>
       <button class="btn-trial" onclick="startTrial()">Get Annual Access</button>
       <div class="motiny">Annual commitment. 30-day money-back guarantee. No free trial.</div>

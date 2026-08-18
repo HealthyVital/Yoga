@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Subscribe – Yogi Khasha</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <script src="lang.js"></script>
   <!-- Stripe.js v3 -->
   <script src="https://js.stripe.com/v3/"></script>
   <style>
@@ -87,7 +88,7 @@
 
     <div class="order-sub" id="order-subtitle">Subscribe</div>
     <div class="trial-head" id="trial-head">7 days free</div>
-    <div class="trial-then" id="trial-then">Then $225.00 per year<br>Starting <span id="trial-start-date"></span></div>
+    <div class="trial-then" id="trial-then">Then €120.00 per year<br>Starting <span id="trial-start-date"></span></div>
 
     <div class="order-card">
       <div class="order-row">
@@ -95,7 +96,7 @@
           <div class="order-name" id="order-name">Yogi Khasha – Annual</div>
           <div class="order-cycle" id="order-cycle">Billed yearly · Cancel anytime</div>
         </div>
-        <div class="order-price" id="order-price-right">$225</div>
+        <div class="order-price" id="order-price-right">€120</div>
       </div>
     </div>
 
@@ -104,10 +105,10 @@
       <button class="btn-promo" onclick="applyPromo()">Apply</button>
     </div>
 
-    <div class="total-row"><span class="subtotal-label">Subtotal</span><span id="subtotal-val">$225.00</span></div>
-    <div class="total-row" id="after-trial-row"><span class="subtotal-label">Total after trial</span><span id="after-trial-val">$225.00</span></div>
+    <div class="total-row"><span class="subtotal-label" data-i18n="pay-subtotal">Subtotal</span><span id="subtotal-val">€120.00</span></div>
+    <div class="total-row" id="after-trial-row"><span class="subtotal-label" data-i18n="pay-after-trial">Total after trial</span><span id="after-trial-val">€120.00</span></div>
     <div class="divider"></div>
-    <div class="total-row big"><span>Due today</span><span id="due-today" class="free-tag">$0.00</span></div>
+    <div class="total-row big"><span data-i18n="pay-due-today">Due today</span><span id="due-today" class="free-tag">€0.00</span></div>
 
     <div class="left-footer">
       Questions? <a href="mailto:info@yogikhasha.com">info@yogikhasha.com</a><br>
@@ -233,36 +234,36 @@ if(type==='course'){
   price=coursePrice;
   document.getElementById('back-link').href='course-detail.html?id='+courseId;
   document.getElementById('order-subtitle').textContent='One-time Purchase';
-  document.getElementById('trial-head').textContent='$'+price.toFixed(2);
+  document.getElementById('trial-head').textContent='€'+price.toFixed(2);
   document.getElementById('trial-then').innerHTML='Instant access &nbsp;·&nbsp; No subscription required';
   document.getElementById('order-name').textContent=courseName;
   document.getElementById('order-cycle').textContent='Lifetime access · No subscription required';
-  document.getElementById('order-price-right').textContent='$'+price;
-  document.getElementById('subtotal-val').textContent='$'+price.toFixed(2);
+  document.getElementById('order-price-right').textContent='€'+price;
+  document.getElementById('subtotal-val').textContent='€'+price.toFixed(2);
   document.getElementById('after-trial-row').style.display='none';
   const dueEl=document.getElementById('due-today');
-  dueEl.textContent='$'+price.toFixed(2);
+  dueEl.textContent='€'+price.toFixed(2);
   dueEl.className='';
   dueEl.style.fontWeight='800';
-  document.getElementById('btn-sub-text').textContent='Pay $'+price.toFixed(2);
+  document.getElementById('btn-sub-text').textContent='Pay €'+price.toFixed(2);
   document.querySelector('.legal').innerHTML='By purchasing you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. Instant lifetime access upon payment.';
   document.getElementById('cancel-date').closest('.legal').removeAttribute('id');
 } else {
   // ── SUBSCRIPTION MODE ──
   const isAnnual=plan==='annual';
-  price=isAnnual?225:25;
+  price=isAnnual?120:15;
   const cycle=isAnnual?'Billed yearly · Cancel anytime':'Billed monthly · Cancel anytime';
   const afterDate=new Date();afterDate.setDate(afterDate.getDate()+7);
   const opts={month:'long',day:'numeric',year:'numeric'};
   const afterStr=afterDate.toLocaleDateString('en-US',opts);
   document.getElementById('order-subtitle').textContent='Subscribe to Yogi Khasha';
   document.getElementById('trial-head').textContent='7 days free';
-  document.getElementById('trial-then').innerHTML=`Then $${price}.00 per ${isAnnual?'year':'month'}<br>Starting <span>${afterStr}</span>`;
+  document.getElementById('trial-then').innerHTML=`Then €${price}.00 per ${isAnnual?'year':'month'}<br>Starting <span>${afterStr}</span>`;
   document.getElementById('order-name').textContent=`Yogi Khasha – ${isAnnual?'Annual':'Monthly'}`;
   document.getElementById('order-cycle').textContent=cycle;
-  document.getElementById('order-price-right').textContent=`$${price}`;
-  document.getElementById('subtotal-val').textContent=`$${price}.00`;
-  document.getElementById('after-trial-val').textContent=`$${price}.00`;
+  document.getElementById('order-price-right').textContent=`€${price}`;
+  document.getElementById('subtotal-val').textContent=`€${price}.00`;
+  document.getElementById('after-trial-val').textContent=`€${price}.00`;
   document.getElementById('cancel-date').textContent=afterStr;
 }
 
@@ -294,7 +295,7 @@ function showError(msg){document.getElementById('err-msg').textContent=msg;}
 function setLoading(on){
   const btn=document.getElementById('btn-subscribe');
   btn.disabled=on;
-  const defaultText=type==='course'?'Pay $'+price.toFixed(2):'Subscribe with obligation to pay';
+  const defaultText=type==='course'?'Pay €'+price.toFixed(2):'Subscribe with obligation to pay';
   document.getElementById('btn-sub-text').textContent=on?'Processing…':defaultText;
 }
 
@@ -360,8 +361,8 @@ function applyPromo(){
   const code=document.getElementById('promo-code').value.trim().toUpperCase();
   if(code==='WELCOME10'){
     const disc=Math.round(price*0.1);
-    document.getElementById('subtotal-val').textContent=`$${price-disc}.00`;
-    document.getElementById('after-trial-val').textContent=`$${price-disc}.00`;
+    document.getElementById('subtotal-val').textContent=`€${price-disc}.00`;
+    document.getElementById('after-trial-val').textContent=`€${price-disc}.00`;
     showError('');alert('Promo code applied! 10% off your first payment.');
   } else {
     showError('Promo code not found.');
