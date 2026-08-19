@@ -143,7 +143,7 @@
 <div class="mo" id="sub-modal">
   <div class="mobox">
     <div class="moimg" style="height:150px">
-      <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt="Yogi Khasha"/>
+      <img id="modal-banner-img" src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt="Yogi Khasha"/>
       <button class="mox" onclick="closeSub()">×</button>
     </div>
     <div class="mobody">
@@ -170,9 +170,10 @@
         </div>
       </div>
       <label class="flabel" style="margin-top:8px" data-i18n="modal-email">Email</label>
-      <input class="finput" type="email" id="sub-email" placeholder="email address" data-i18n-ph="modal-email-ph"/>
+      <input class="finput" type="email" id="sub-email" name="email" autocomplete="email" placeholder="email address" data-i18n-ph="modal-email-ph"/>
       <button class="btn-trial" onclick="startTrial()" data-i18n="btn-get-access">Get Full Access</button>
       <div class="motiny" data-i18n="modal-tiny">Immediate access. Cancel anytime.</div>
+      <div style="text-align:center;margin-top:12px;font-size:13px;color:var(--tg)">Already a member? <a onclick="closeSub();document.getElementById('login-modal').classList.add('on')" style="color:var(--pm);cursor:pointer;font-weight:600">Sign In</a></div>
     </div>
   </div>
 </div>
@@ -379,6 +380,9 @@ function toggleViewAll(gridId){
 }
 
 initData();renderAll();updateNav();applyLang();
+(function(){try{const si=JSON.parse(localStorage.getItem('yk_site_imgs')||'{}');
+  if(si.p_modal){const m=document.getElementById('modal-banner-img');if(m)m.src=si.p_modal;}
+}catch(e){}})();
 </script>
 <footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">

@@ -341,7 +341,7 @@
 <div class="mo" id="sub-modal">
   <div class="mobox">
     <div class="moimg">
-      <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt=""/>
+      <img id="ny-modal-img" src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt=""/>
       <div class="moimg-text"><h3>Yogi Khasha</h3><p>Premium Membership</p></div>
       <button class="mox" onclick="closeSub()">×</button>
     </div>
@@ -607,6 +607,9 @@ function openLogin(){ window.location.href='index.html'; }
 //  BOOT
 // ════════════════════════════════════════════════════════
 initPage();applyLang();
+(function(){try{const si=JSON.parse(localStorage.getItem('yk_site_imgs')||'{}');
+  if(si.p_nymodal){const m=document.getElementById('ny-modal-img');if(m)m.src=si.p_nymodal;}
+}catch(e){}})();
 </script>
 <footer style="background:#0a0a18;color:#e5e7eb;border-top:1px solid rgba(255,255,255,.07);padding:28px 32px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">

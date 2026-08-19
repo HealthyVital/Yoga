@@ -181,7 +181,7 @@
 
 <!-- SECTION 2 -->
 <div class="two-col">
-  <div class="img-sq"><div class="iw"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=620&q=80" loading="lazy" alt="Yogi Khasha"/></div></div>
+  <div class="img-sq"><div class="iw"><img id="about-teacher-img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=620&q=80" loading="lazy" alt="Yogi Khasha"/></div></div>
   <div class="col-text" data-i18n="about-body">With over 21 years of teaching experience and thousands of transformed lives, Yogi Khasha has spent two decades mastering the ancient movement sequences that modern science now confirms: five specific movements, practiced daily, that reactivate your body's natural youth mechanisms. This isn't exercise — it's the most powerful anti-aging ritual your body was designed to perform.</div>
 </div>
 
@@ -290,10 +290,10 @@
       <label class="flabel" data-i18n="modal-fname">First name</label>
       <input class="finput" type="text" id="su-fname" data-i18n-ph="modal-fname-ph" placeholder="first name"/>
       <label class="flabel" data-i18n="modal-email">Email</label>
-      <input class="finput" type="email" id="su-email" data-i18n-ph="modal-email-ph" placeholder="email address"/>
+      <input class="finput" type="email" id="su-email" name="email" autocomplete="email" data-i18n-ph="modal-email-ph" placeholder="email address"/>
       <button class="btn-signup" onclick="doSignup()" data-i18n="modal-signup-btn">Sign Up</button>
       <div class="m-legal"><span data-i18n="modal-legal">By joining you agree to our</span> <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms</a>.</div>
-      <div class="m-login"><span data-i18n="modal-have-account">Already have an account?</span> <a href="practice.html">Click Here</a></div>
+      <div class="m-login"><span data-i18n="modal-have-account">Already have an account?</span> <a href="practice.html" style="font-weight:700;color:var(--primary)">Sign In →</a></div>
     </div>
   </div>
 </div>
@@ -330,6 +330,10 @@ function handleHamLogin(){
 function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
 document.addEventListener('click',function(){const d=document.getElementById('ham-drop');if(d)d.classList.remove('open')});
 updateNav();
+(function(){try{const si=JSON.parse(localStorage.getItem('yk_site_imgs')||'{}');
+  if(si.p_hero){const h=document.querySelector('.hero');if(h)h.style.backgroundImage="url('"+si.p_hero+"')";}
+  if(si.p_teacher){const t=document.getElementById('about-teacher-img');if(t)t.src=si.p_teacher;}
+}catch(e){}})();
 </script>
 </body>
 </html>

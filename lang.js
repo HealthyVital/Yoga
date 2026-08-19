@@ -343,3 +343,11 @@ function applyLang(){
   document.querySelectorAll('.lang-select').forEach(sel=>{ sel.value=getLang(); });
 }
 document.addEventListener('DOMContentLoaded',applyLang);
+
+// Content protection
+document.addEventListener('DOMContentLoaded',function(){
+  document.head.insertAdjacentHTML('beforeend','<style>body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}input,textarea,select{-webkit-user-select:text!important;user-select:text!important}</style>');
+  document.addEventListener('copy',function(e){e.preventDefault();});
+  document.addEventListener('cut',function(e){e.preventDefault();});
+  document.addEventListener('contextmenu',function(e){e.preventDefault();});
+});
