@@ -181,7 +181,7 @@ function getEmbedUrl(url){
   if(!url)return '';
   // YouTube
   const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  if(yt)return `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`;
+  if(yt)return `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&color=white`;
   // Vimeo
   const vm=url.match(/vimeo\.com\/(\d+)/);
   if(vm)return `https://player.vimeo.com/video/${vm[1]}?autoplay=1`;
@@ -220,7 +220,9 @@ function render(){
     const isVideo=embed.endsWith('.mp4')||embed.endsWith('.webm');
     vc.innerHTML=isVideo
       ?`<video controls autoplay src="${embed}" style="position:absolute;inset:0;width:100%;height:100%;background:#000"></video>`
-      :`<iframe src="${embed}" allowfullscreen allow="autoplay; fullscreen"></iframe>`;
+      :`<iframe src="${embed}" allowfullscreen allow="autoplay; fullscreen"></iframe>
+        <div style="position:absolute;top:0;left:0;right:0;height:52px;z-index:5;pointer-events:all;cursor:default"></div>
+        <div style="position:absolute;bottom:0;right:0;width:140px;height:40px;z-index:5;background:#000;pointer-events:all"></div>`;
   } else {
     vc.innerHTML=`
       <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4" src="${cls.thumbnail}" alt="${cls.title}"/>
