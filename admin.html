@@ -489,7 +489,7 @@ function renderSeries(){
   tb.innerHTML=data.map(s=>`<tr>
     <td><img class="thumb-sm" src="${s.thumbnail||''}" onerror="this.style.opacity='.3'" alt=""/></td>
     <td><b>${s.title}</b></td>
-    <td>${s.count||0} classes</td>
+    <td>${s.classCount||0} classes</td>
     <td><span class="${s.isFree?'badge-free':'badge-paid'}">${s.isFree?'FREE':'Members Only'}</span></td>
     <td><div class="tbl-actions"><button class="btn-edit" onclick="editSeries(${s.id})">Edit</button><button class="btn-del" onclick="deleteSeries(${s.id})">Delete</button></div></td>
   </tr>`).join('');
@@ -615,7 +615,7 @@ function refreshSeriesCounts(){
   const seriesData=getData('yk_series',DS);
   seriesData.forEach(s=>{
     const n=classes.filter(c=>String(c.seriesId)===String(s.id)).length;
-    if(n>0)s.count=n;
+    s.classCount=n;
   });
   setData('yk_series',seriesData);
 }
@@ -695,7 +695,7 @@ function editSeries(id){
   document.getElementById('series-id').value=id;
   document.getElementById('series-title').value=s.title||'';
   document.getElementById('series-desc').value=s.desc||'';
-  document.getElementById('series-count').value=s.count||'';
+  document.getElementById('series-count').value=s.classCount||'';
   document.getElementById('series-free').checked=!!s.isFree;
   if(s.thumbnail)setPickerImage('series',s.thumbnail);else clearPickerImage('series');
   openModal('series-modal');
@@ -707,7 +707,7 @@ function saveSeries(){
     id:id?parseInt(id):Date.now(),
     title:document.getElementById('series-title').value.trim(),
     desc:document.getElementById('series-desc').value.trim(),
-    count:parseInt(document.getElementById('series-count').value)||0,
+    classCount:parseInt(document.getElementById('series-count').value)||0,
     thumbnail:window.imgData_series||'',
     isFree:document.getElementById('series-free').checked
   };
