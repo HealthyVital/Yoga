@@ -193,7 +193,7 @@
         </button>
       </div>
       <table class="tbl">
-        <thead><tr><th>Image</th><th>Title</th><th>Duration</th><th>Level</th><th>Access</th><th>Video</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Image</th><th>Title</th><th>Duration</th><th>Level</th><th>Access</th><th>Series</th><th>Video</th><th>Actions</th></tr></thead>
         <tbody id="classes-tbody"></tbody>
       </table>
     </div>
@@ -311,6 +311,10 @@
     <div class="form-row">
       <label class="flabel">Video URL <span style="font-weight:400;color:var(--tg)">(YouTube, Vimeo, or direct .mp4)</span></label>
       <input class="finput" id="class-video" placeholder="https://www.youtube.com/watch?v=..."/>
+    </div>
+    <div class="form-row">
+      <label class="flabel">Add to Series <span style="font-weight:400;color:var(--tg)">(optional)</span></label>
+      <select class="finput" id="class-series"></select>
     </div>
     <div class="toggle-row">
       <label class="toggle"><input type="checkbox" id="class-free"/><span class="tslide"></span></label>
@@ -459,17 +463,23 @@ function renderAll(){renderClasses();renderSeries();renderCourses();}
 
 function renderClasses(){
   const data=getData('yk_classes',DC);
+  const seriesData=getData('yk_series',DS);
   const tb=document.getElementById('classes-tbody');
-  if(!data.length){tb.innerHTML=`<tr><td colspan="7"><div class="empty-row">No classes yet.</div></td></tr>`;return;}
-  tb.innerHTML=data.map(c=>`<tr>
-    <td><img class="thumb-sm" src="${c.thumbnail||''}" onerror="this.style.opacity='.3'" alt=""/></td>
-    <td><b>${c.title}</b></td>
-    <td>${c.duration||'—'}</td>
-    <td>${c.level||'all levels'}</td>
-    <td><span class="${c.isFree?'badge-free':'badge-paid'}">${c.isFree?'FREE':'Members Only'}</span></td>
-    <td style="font-size:12px;color:var(--tg)">${c.videoUrl?`<a href="${c.videoUrl}" target="_blank" style="color:var(--pm)">Link ↗</a>`:'—'}</td>
-    <td><div class="tbl-actions"><button class="btn-edit" onclick="editClass(${c.id})">Edit</button><button class="btn-del" onclick="deleteClass(${c.id})">Delete</button></div></td>
-  </tr>`).join('');
+  if(!data.length){tb.innerHTML=`<tr><td colspan="8"><div class="empty-row">No classes yet.</div></td></tr>`;return;}
+  tb.innerHTML=data.map(c=>{
+    const s=c.seriesId?seriesData.find(x=>String(x.id)===String(c.seriesId)):null;
+    const seriesCell=s?`<span style="background:var(--pll);color:var(--p);font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap">${s.title}</span>`:'<span style="color:var(--tg)">—</span>';
+    return `<tr>
+      <td><img class="thumb-sm" src="${c.thumbnail||''}" onerror="this.style.opacity='.3'" alt=""/></td>
+      <td><b>${c.title}</b></td>
+      <td>${c.duration||'—'}</td>
+      <td>${c.level||'all levels'}</td>
+      <td><span class="${c.isFree?'badge-free':'badge-paid'}">${c.isFree?'FREE':'Members Only'}</span></td>
+      <td style="font-size:12px">${seriesCell}</td>
+      <td style="font-size:12px;color:var(--tg)">${c.videoUrl?`<a href="${c.videoUrl}" target="_blank" style="color:var(--pm)">Link ↗</a>`:'—'}</td>
+      <td><div class="tbl-actions"><button class="btn-edit" onclick="editClass(${c.id})">Edit</button><button class="btn-del" onclick="deleteClass(${c.id})">Delete</button></div></td>
+    </tr>`;
+  }).join('');
 }
 
 function renderSeries(){
@@ -593,6 +603,23 @@ function useImgUrl(){
 
 document.getElementById('img-pop').addEventListener('click',function(e){if(e.target===this)cancelImgPicker();});
 
+function populateSeriesDropdown(){
+  const series=getData('yk_series',DS);
+  const sel=document.getElementById('class-series');
+  sel.innerHTML='<option value="">— No Series —</option>'+
+    series.map(s=>`<option value="${s.id}">${s.title}</option>`).join('');
+}
+
+function refreshSeriesCounts(){
+  const classes=getData('yk_classes',DC);
+  const seriesData=getData('yk_series',DS);
+  seriesData.forEach(s=>{
+    const n=classes.filter(c=>String(c.seriesId)===String(s.id)).length;
+    if(n>0)s.count=n;
+  });
+  setData('yk_series',seriesData);
+}
+
 // ════════════════════════════════════════════════
 //  CLASSES CRUD
 // ════════════════════════════════════════════════
@@ -603,6 +630,8 @@ function openAddClass(){
   document.getElementById('class-level').value='all levels';
   document.getElementById('class-free').checked=false;
   clearPickerImage('class');
+  populateSeriesDropdown();
+  document.getElementById('class-series').value='';
   openModal('class-modal');
 }
 function editClass(id){
@@ -616,11 +645,14 @@ function editClass(id){
   document.getElementById('class-video').value=c.videoUrl||'';
   document.getElementById('class-free').checked=!!c.isFree;
   if(c.thumbnail)setPickerImage('class',c.thumbnail);else clearPickerImage('class');
+  populateSeriesDropdown();
+  document.getElementById('class-series').value=c.seriesId||'';
   openModal('class-modal');
 }
 function saveClass(){
   const id=document.getElementById('class-id').value;
   const data=getData('yk_classes',DC);
+  const seriesVal=document.getElementById('class-series').value;
   const obj={
     id:id?parseInt(id):Date.now(),
     title:document.getElementById('class-title').value.trim(),
@@ -629,16 +661,21 @@ function saveClass(){
     desc:document.getElementById('class-desc').value.trim(),
     videoUrl:document.getElementById('class-video').value.trim(),
     thumbnail:window.imgData_class||'',
-    isFree:document.getElementById('class-free').checked
+    isFree:document.getElementById('class-free').checked,
+    seriesId:seriesVal?parseInt(seriesVal):null
   };
   if(!obj.title){alert('Please enter a title.');return;}
   if(id){const i=data.findIndex(x=>x.id===parseInt(id));if(i>-1)data[i]=obj;else data.push(obj);}
   else data.push(obj);
-  setData('yk_classes',data);closeModal('class-modal');renderClasses();
+  setData('yk_classes',data);
+  refreshSeriesCounts();
+  closeModal('class-modal');renderClasses();renderSeries();
 }
 function deleteClass(id){
   if(!confirm('Delete this class?'))return;
-  setData('yk_classes',getData('yk_classes',DC).filter(x=>x.id!==id));renderClasses();
+  setData('yk_classes',getData('yk_classes',DC).filter(x=>x.id!==id));
+  refreshSeriesCounts();
+  renderClasses();renderSeries();
 }
 
 // ════════════════════════════════════════════════
