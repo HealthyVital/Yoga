@@ -1,3 +1,10 @@
+// Content protection — injected immediately before body renders
+(function(){
+  var s=document.createElement('style');
+  s.textContent='*{-webkit-user-select:none!important;-moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important}input,textarea,select{-webkit-user-select:text!important;-moz-user-select:text!important;user-select:text!important}';
+  document.head.appendChild(s);
+})();
+
 const TRANSLATIONS = {
   en: {
     'nav-practice':'Practice','nav-courses':'Courses','nav-join-free':'Join Free',
@@ -346,7 +353,6 @@ document.addEventListener('DOMContentLoaded',applyLang);
 
 // Content protection
 document.addEventListener('DOMContentLoaded',function(){
-  document.head.insertAdjacentHTML('beforeend','<style>body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}input,textarea,select{-webkit-user-select:text!important;user-select:text!important}</style>');
   document.addEventListener('copy',function(e){e.preventDefault();});
   document.addEventListener('cut',function(e){e.preventDefault();});
   document.addEventListener('contextmenu',function(e){e.preventDefault();});
