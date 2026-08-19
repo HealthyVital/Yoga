@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ist Yogi Khasha das Richtige für dich? – Kostenloser Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-user-select:none;user-select:none}
+body{font-family:'Open Sans',sans-serif;background:#0a0e1a;color:#fff;min-height:100vh;display:flex;justify-content:center}
+#app{width:100%;max-width:520px;min-height:100vh;position:relative;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;align-items:center;padding:28px 24px 48px;min-height:100vh}
+.screen.active{display:flex}
+.logo{font-weight:900;font-size:16px;letter-spacing:.12em;color:rgba(255,255,255,.45);margin-bottom:28px}
+.logo span{color:#c8a96e}
+.intro-badge{background:rgba(200,169,110,.15);color:#c8a96e;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 18px;border-radius:99px;margin-bottom:26px}
+.intro-title{font-size:clamp(23px,6.5vw,33px);font-weight:800;text-align:center;line-height:1.25;margin-bottom:14px}
+.intro-title em{font-style:normal;background:linear-gradient(135deg,#c8a96e,#e8c87a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.intro-sub{color:rgba(255,255,255,.58);text-align:center;font-size:15px;line-height:1.65;margin-bottom:32px;max-width:360px}
+.trust-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.4)}
+.trust-dot{width:5px;height:5px;background:#c8a96e;border-radius:50%;flex-shrink:0}
+.btn-start{background:linear-gradient(135deg,#c8a96e,#e8c87a);color:#0a0e1a;font-weight:800;font-size:17px;padding:18px 36px;border-radius:99px;border:none;cursor:pointer;width:100%;max-width:340px;box-shadow:0 8px 28px rgba(200,169,110,.35);letter-spacing:.02em}
+.btn-start:active{transform:scale(.97)}
+.intro-time{color:rgba(255,255,255,.3);font-size:12px;margin-top:14px}
+.progress-wrap{width:100%;margin-bottom:24px}
+.progress-meta{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.4);margin-bottom:7px}
+.progress-bar{width:100%;height:5px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#c8a96e,#e8c87a);border-radius:99px;transition:width .45s ease}
+.q-icon{font-size:58px;margin:12px 0 18px}
+.q-text{font-size:clamp(17px,4.8vw,22px);font-weight:700;text-align:center;line-height:1.4;margin-bottom:10px;max-width:400px}
+.q-hook{color:rgba(255,255,255,.4);font-size:13px;text-align:center;height:36px;transition:color .3s;font-style:italic;line-height:1.5;padding:0 8px}
+.q-hook.lit{color:#c8a96e}
+.q-btns{width:100%;max-width:380px;display:flex;flex-direction:column;gap:13px;margin-top:24px}
+.btn-yes{background:linear-gradient(135deg,#1a5c44,#24996a);color:#fff;font-weight:700;font-size:17px;padding:18px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 6px 22px rgba(36,153,106,.28);transition:transform .1s}
+.btn-yes:active{transform:scale(.97)}
+.btn-no{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);font-size:15px;font-weight:600;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.11);cursor:pointer}
+.reframe-box{display:none;width:100%;max-width:380px;background:rgba(200,169,110,.09);border:1px solid rgba(200,169,110,.22);border-radius:16px;padding:18px 20px;margin-top:18px}
+.reframe-box.show{display:block}
+.reframe-txt{color:rgba(255,255,255,.72);font-size:14px;line-height:1.65;margin-bottom:14px}
+.btn-reconsider{background:linear-gradient(135deg,#c8a96e,#e8c87a);color:#0a0e1a;font-weight:700;font-size:15px;padding:13px;border-radius:10px;border:none;cursor:pointer;width:100%;margin-bottom:8px}
+.btn-skip{background:none;border:none;color:rgba(255,255,255,.28);font-size:12px;cursor:pointer;padding:5px;width:100%}
+#screen-loading{justify-content:center;gap:18px}
+.loading-icon{font-size:54px;animation:pulse 1.6s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.08);opacity:1}}
+.loading-title{font-size:21px;font-weight:700;text-align:center;color:rgba(255,255,255,.9)}
+.loading-steps{display:flex;flex-direction:column;gap:13px;margin-top:6px;width:100%;max-width:300px}
+.l-step{color:rgba(255,255,255,.35);font-size:14px;display:flex;align-items:center;gap:10px;opacity:0;transition:opacity .5s,color .5s}
+.l-step.show{opacity:1;color:rgba(255,255,255,.7)}
+.l-dot{width:7px;height:7px;border-radius:50%;background:#c8a96e;flex-shrink:0}
+#screen-result{overflow-y:auto}
+.res-badge{background:rgba(36,153,106,.18);color:#24996a;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 18px;border-radius:99px;margin-bottom:18px}
+.res-title{font-size:clamp(20px,5.5vw,26px);font-weight:800;text-align:center;line-height:1.3;margin-bottom:11px}
+.res-sub{color:rgba(255,255,255,.57);font-size:14px;text-align:center;line-height:1.65;margin-bottom:22px;max-width:360px}
+.gains-list{width:100%;max-width:400px;display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.gain-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.05);padding:12px 15px;border-radius:12px;font-size:14px;color:rgba(255,255,255,.82)}
+.gain-check{width:22px;height:22px;background:linear-gradient(135deg,#c8a96e,#e8c87a);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:#0a0e1a;font-weight:900}
+.price-box{width:100%;max-width:400px;background:linear-gradient(135deg,rgba(200,169,110,.13),rgba(200,169,110,.07));border:1px solid rgba(200,169,110,.28);border-radius:20px;padding:20px 22px;margin-bottom:26px;text-align:center}
+.price-label{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:14px}
+.price-tiers{display:flex;gap:10px;justify-content:center}
+.price-tier{background:rgba(255,255,255,.07);border-radius:12px;padding:11px 18px;text-align:center;flex:1}
+.price-amount{font-size:22px;font-weight:800;color:#c8a96e}
+.price-period{font-size:11px;color:rgba(255,255,255,.38);margin-top:3px}
+.price-note{margin-top:12px;font-size:12px;color:rgba(255,255,255,.35);font-style:italic}
+.btn-cta{background:linear-gradient(135deg,#c8a96e,#e8c87a);color:#0a0e1a;font-weight:800;font-size:18px;padding:20px;border-radius:16px;border:none;cursor:pointer;width:100%;max-width:400px;margin-bottom:12px;box-shadow:0 8px 30px rgba(200,169,110,.38);letter-spacing:.01em}
+.btn-cta:active{transform:scale(.98)}
+.res-guarantee{color:rgba(255,255,255,.28);font-size:12px;text-align:center;margin-bottom:36px}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="logo">YOGI <span>KHASHA</span></div>
+  <div class="intro-badge">🧘 Kostenloser Test · 2 Minuten</div>
+  <h1 class="intro-title">Ist Yogi Khasha <em>die Veränderung, nach der du suchst?</em></h1>
+  <p class="intro-sub">Beantworte 8 kurze Fragen und entdecke, ob unsere jahrtausendealte Yogapraxis deinen Körper, deinen Geist und deinen Alltag transformieren kann.</p>
+  <div class="trust-row">
+    <div class="trust-item"><div class="trust-dot"></div>Keine Karte nötig</div>
+    <div class="trust-item"><div class="trust-dot"></div>100% vertraulich</div>
+    <div class="trust-item"><div class="trust-dot"></div>Sofortiges Ergebnis</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">Mein Profil entdecken →</button>
+  <p class="intro-time">⏱ Weniger als 2 Minuten</p>
+</div>
+
+<!-- QUESTION -->
+<div id="screen-q" class="screen">
+  <div class="logo">YOGI <span>KHASHA</span></div>
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="q-label">Frage 1 von 8</span>
+      <span id="q-pct">12%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:12%"></div></div>
+  </div>
+  <div class="q-icon" id="q-icon">✨</div>
+  <p class="q-text" id="q-text"></p>
+  <p class="q-hook" id="q-hook"></p>
+  <div class="q-btns" id="q-btns">
+    <button class="btn-yes" onclick="answerYes()">✓ &nbsp;Ja, auf jeden Fall</button>
+    <button class="btn-no" onclick="answerNo()">Nein, nicht im Moment</button>
+  </div>
+  <div class="reframe-box" id="reframe-box">
+    <p class="reframe-txt" id="reframe-txt"></p>
+    <button class="btn-reconsider" onclick="reconsider()">Doch, ich probiere es!</button>
+    <button class="btn-skip" onclick="skipQ()">Nicht jetzt, weiter →</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="screen-loading" class="screen">
+  <div class="loading-icon">🔮</div>
+  <p class="loading-title">Dein Profil wird analysiert...</p>
+  <div class="loading-steps">
+    <div class="l-step" id="ls1"><div class="l-dot"></div>Dein Potenzial wird berechnet</div>
+    <div class="l-step" id="ls2"><div class="l-dot"></div>Dein Plan wird personalisiert</div>
+    <div class="l-step" id="ls3"><div class="l-dot"></div>Dein Ergebnis wird vorbereitet</div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="screen-result" class="screen">
+  <div class="logo">YOGI <span>KHASHA</span></div>
+  <div class="res-badge" id="res-badge"></div>
+  <h2 class="res-title" id="res-title"></h2>
+  <p class="res-sub" id="res-sub"></p>
+  <div class="gains-list" id="gains-list"></div>
+  <div class="price-box">
+    <p class="price-label">Dein vollständiger Zugang zu Yogi Khasha</p>
+    <div class="price-tiers">
+      <div class="price-tier"><div class="price-amount">120€</div><div class="price-period">pro Jahr</div></div>
+      <div class="price-tier"><div class="price-amount">10€</div><div class="price-period">pro Monat</div></div>
+      <div class="price-tier"><div class="price-amount">0,33€</div><div class="price-period">pro Tag</div></div>
+    </div>
+    <p class="price-note">Weniger als ein Kaugummi — und verändert dein ganzes Leben</p>
+  </div>
+  <button class="btn-cta" onclick="goCTA()">Meine Transformation starten →</button>
+  <p class="res-guarantee">🛡 Zufriedenheitsgarantie · Jederzeit kündbar</p>
+</div>
+
+</div>
+<script>
+const Q=[
+  {icon:'✨',q:'Möchtest du in den nächsten 30 Tagen spürbar jünger aussehen und dich jünger fühlen?',hook:'Yoga aktiviert die Zellregeneration und kehrt oxidativen Stress um.',noframe:'Auch nur deine aktuelle Vitalität zu erhalten ist eine lohnenswerte Transformation.',gain:'Jünger aussehen und mich jünger fühlen'},
+  {icon:'⏱️',q:'Kannst du täglich 15 Minuten für dein körperliches und geistiges Wohlbefinden aufwenden?',hook:'15 Minuten reichen aus — unsere Einheiten sind für deinen Alltag konzipiert.',noframe:'Was wäre, wenn du mit nur 10 Minuten anfängst? Viele unserer Mitglieder haben genau so begonnen.',gain:'Nur 15 Min täglich von zu Hause praktizieren'},
+  {icon:'🌙',q:'Möchtest du Stress abbauen und jede Nacht tief und erholsam schlafen?',hook:'Yoga aktiviert das parasympathische Nervensystem — den natürlichen Ruhemodus deines Körpers.',noframe:null,gain:'Stress reduzieren und besser schlafen'},
+  {icon:'⚖️',q:'Träumst du davon, dein Idealgewicht auf natürliche Weise zu erreichen — ohne extreme Diäten?',hook:'Yoga reguliert Cortisol und die Hormone, die Stoffwechsel und Appetit steuern.',noframe:null,gain:'Mein Idealgewicht auf natürliche Weise erreichen'},
+  {icon:'⚡',q:'Möchtest du mit echter Energie aufwachen und diese den ganzen Tag halten?',hook:'Eine 15-minütige Morgenpraxis belebt den Körper mehr als zwei Tassen Kaffee.',noframe:null,gain:'Mehr Energie und Vitalität den ganzen Tag'},
+  {icon:'🏠',q:'Übst du lieber zuhause, in deinem eigenen Raum, ohne feste Zeiten?',hook:'Kein Pendeln, keine fixen Zeiten, keine fremden Blicke — nur du und deine Praxis.',noframe:null,gain:'Zuhause üben, ohne Fahrtweg oder Zeitplan'},
+  {icon:'🌱',q:'Möchtest du gesunde Gewohnheiten aufbauen, die dein Leben dauerhaft verbessern?',hook:'Gewohnheiten, die 21 Tage lang geübt werden, werden automatisch und lebenslang.',noframe:null,gain:'Gesunde Gewohnheiten fürs Leben aufbauen'},
+  {icon:'💶',q:'Kannst du 0,33€ pro Tag — weniger als ein Kaugummi — in die Transformation deines Körpers und Geistes investieren?',hook:'120€ pro Jahr. Weniger als der Preis einer einzigen Yogastunde pro Monat.',noframe:'Eine einzelne Yogastunde kostet 15–25€. Mit Yogi Khasha übst du jeden Tag für nur 0,33€.',gain:'Weniger als 1€ täglich in mein Wohlbefinden investieren'}
+];
+
+const RESULTS={
+  high:{badge:'🏆 Ideales Profil gefunden',title:'Du bist der perfekte Kandidat für Yogi Khasha!',sub:'Deine Antworten bestätigen, dass du alles mitbringst, um Körper und Geist zu transformieren. Yogi Khasha wurde genau für dich gemacht.'},
+  mid:{badge:'✨ Sehr kompatibles Profil',title:'Yogi Khasha kann dein Leben verändern!',sub:'Du hast das Wesentliche, um anzufangen. Tausende Menschen mit deinem Profil haben bereits ihren Körper, ihre Energie und ihren Schlaf mit unserer Praxis verändert.'},
+  low:{badge:'🌱 Dein idealer Ausgangspunkt',title:'Yogi Khasha begleitet dich beim ersten Schritt',sub:'Es spielt keine Rolle, wo du anfängst. Das Einzige, was zählt, ist anzufangen — und du hast diesen Schritt bereits getan, indem du diesen Test abgeschlossen hast.'}
+};
+
+let idx=0,answers=[],reframing=false;
+
+function startQuiz(){show('screen-q');showQ(0);}
+
+function showQ(i){
+  const q=Q[i];
+  document.getElementById('q-icon').textContent=q.icon;
+  document.getElementById('q-text').textContent=q.q;
+  const h=document.getElementById('q-hook');
+  h.textContent='';h.classList.remove('lit');
+  document.getElementById('q-btns').style.display='flex';
+  document.getElementById('reframe-box').classList.remove('show');
+  reframing=false;
+  const pct=Math.round(((i+1)/8)*100);
+  document.getElementById('q-label').textContent='Frage '+(i+1)+' von 8';
+  document.getElementById('q-pct').textContent=pct+'%';
+  document.getElementById('prog').style.width=pct+'%';
+}
+
+function answerYes(){
+  answers[idx]=true;
+  const h=document.getElementById('q-hook');
+  h.textContent='✓  '+Q[idx].hook;h.classList.add('lit');
+  document.getElementById('q-btns').style.display='none';
+  setTimeout(advance,950);
+}
+
+function answerNo(){
+  const q=Q[idx];
+  if(q.noframe&&!reframing){
+    reframing=true;
+    document.getElementById('reframe-txt').textContent=q.noframe;
+    document.getElementById('reframe-box').classList.add('show');
+    document.getElementById('q-btns').style.display='none';
+  } else {answers[idx]=false;advance();}
+}
+
+function reconsider(){document.getElementById('reframe-box').classList.remove('show');answerYes();}
+function skipQ(){answers[idx]=false;advance();}
+
+function advance(){
+  idx++;
+  if(idx>=Q.length){runLoading();return;}
+  const s=document.getElementById('screen-q');
+  s.style.opacity='0';s.style.transform='translateX(-30px)';
+  setTimeout(()=>{
+    showQ(idx);
+    s.style.transition='none';s.style.opacity='0';s.style.transform='translateX(30px)';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      s.style.transition='opacity .28s ease,transform .28s ease';
+      s.style.opacity='1';s.style.transform='translateX(0)';
+    }));
+  },240);
+}
+
+function runLoading(){
+  show('screen-loading');
+  [1,2,3].forEach((n,i)=>setTimeout(()=>document.getElementById('ls'+n).classList.add('show'),600+i*700));
+  setTimeout(buildResult,2900);
+}
+
+function buildResult(){
+  const score=answers.filter(Boolean).length;
+  const r=score>=6?RESULTS.high:score>=4?RESULTS.mid:RESULTS.low;
+  document.getElementById('res-badge').textContent=r.badge;
+  document.getElementById('res-title').textContent=r.title;
+  document.getElementById('res-sub').textContent=r.sub;
+  const gains=answers.map((a,i)=>a?Q[i].gain:null).filter(Boolean);
+  document.getElementById('gains-list').innerHTML=gains.map(g=>`<div class="gain-item"><div class="gain-check">✓</div><span>${g}</span></div>`).join('');
+  show('screen-result');
+}
+
+function goCTA(){window.location.href='practice.html';}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
