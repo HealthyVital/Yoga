@@ -307,6 +307,7 @@
         <select class="finput" id="class-level"><option>all levels</option><option>beginner</option><option>intermediate</option><option>advanced</option></select>
       </div>
     </div>
+    <div class="form-row"><label class="flabel">Teacher</label><select class="finput" id="class-teacher"></select></div>
     <div class="form-row"><label class="flabel">Description</label><textarea class="finput" id="class-desc" placeholder="Brief description of this class"></textarea></div>
     <div class="form-row">
       <label class="flabel">Video URL <span style="font-weight:400;color:var(--tg)">(YouTube, Vimeo, or direct .mp4)</span></label>
@@ -349,6 +350,7 @@
     </div>
 
     <div class="form-row"><label class="flabel">Series Title</label><input class="finput" id="series-title" placeholder="e.g. Morning Ritual Series"/></div>
+    <div class="form-row"><label class="flabel">Teacher</label><select class="finput" id="series-teacher"></select></div>
     <div class="form-row"><label class="flabel">Description</label><textarea class="finput" id="series-desc" placeholder="What this series covers"></textarea></div>
     <div class="form-row"><label class="flabel">Number of Classes</label><input class="finput" id="series-count" type="number" min="1" placeholder="e.g. 6"/></div>
     <div class="toggle-row">
@@ -387,7 +389,7 @@
     <div class="form-row"><label class="flabel">Description</label><textarea class="finput" id="course-desc" placeholder="Full course description"></textarea></div>
     <div class="grid-row">
       <div class="form-row"><label class="flabel">Price ($)</label><input class="finput" id="course-price" type="number" min="0" placeholder="50"/></div>
-      <div class="form-row"><label class="flabel">Teacher Name</label><input class="finput" id="course-teacher" placeholder="Yogi Khasha"/></div>
+      <div class="form-row"><label class="flabel">Teacher</label><select class="finput" id="course-teacher"></select></div>
     </div>
     <div class="form-row">
       <label class="flabel" style="margin-bottom:10px">Course Modules & Lessons</label>
@@ -422,6 +424,8 @@ function startApp(){
 // ════════════════════════════════════════════════
 //  DATA
 // ════════════════════════════════════════════════
+const TEACHERS=['Yogi Khasha','Geeta Iyengar','Sharmila Desai','Anjali Mehta','Priya Krishnaswamy','Meera Kapoor','Kavita Sharma','Sunita Rao','Ananya Gupta','Lakshmi Devi','Nandita Krishnan','Radha Menon','Deepa Nair','Swati Chandra','Pooja Iyer','Ravi Shankar','Arun Kumar','Vikram Nair','Suresh Patel','Arjun Singh','Krishnacharya Das'];
+function teacherOptions(sel){return TEACHERS.map(n=>`<option value="${n}"${n===sel?' selected':''}>` +n+'</option>').join('');}
 const DC=[
   {id:1,title:"15 min Morning Vitality Ritual",duration:"15 MIN",level:"all levels",desc:"Begin each day with this energizing sequence.",isFree:true,thumbnail:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=300&q=80",videoUrl:""},
   {id:2,title:"20 min Spinal Awakening & Core Reset",duration:"20 MIN",level:"all levels",desc:"Decompress and wake up the spine.",isFree:true,thumbnail:"https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&q=80",videoUrl:""},
@@ -630,6 +634,7 @@ function openAddClass(){
   document.getElementById('class-level').value='all levels';
   document.getElementById('class-free').checked=false;
   clearPickerImage('class');
+  document.getElementById('class-teacher').innerHTML=teacherOptions('Yogi Khasha');
   populateSeriesDropdown();
   document.getElementById('class-series').value='';
   openModal('class-modal');
@@ -645,6 +650,7 @@ function editClass(id){
   document.getElementById('class-video').value=c.videoUrl||'';
   document.getElementById('class-free').checked=!!c.isFree;
   if(c.thumbnail)setPickerImage('class',c.thumbnail);else clearPickerImage('class');
+  document.getElementById('class-teacher').innerHTML=teacherOptions(c.teacher||'Yogi Khasha');
   populateSeriesDropdown();
   document.getElementById('class-series').value=c.seriesId||'';
   openModal('class-modal');
@@ -662,6 +668,7 @@ function saveClass(){
     videoUrl:document.getElementById('class-video').value.trim(),
     thumbnail:window.imgData_class||'',
     isFree:document.getElementById('class-free').checked,
+    teacher:document.getElementById('class-teacher').value,
     seriesId:seriesVal?parseInt(seriesVal):null
   };
   if(!obj.title){alert('Please enter a title.');return;}
@@ -687,6 +694,7 @@ function openAddSeries(){
   ['series-title','series-desc','series-count'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('series-free').checked=false;
   clearPickerImage('series');
+  document.getElementById('series-teacher').innerHTML=teacherOptions('Yogi Khasha');
   openModal('series-modal');
 }
 function editSeries(id){
@@ -698,6 +706,7 @@ function editSeries(id){
   document.getElementById('series-count').value=s.classCount||'';
   document.getElementById('series-free').checked=!!s.isFree;
   if(s.thumbnail)setPickerImage('series',s.thumbnail);else clearPickerImage('series');
+  document.getElementById('series-teacher').innerHTML=teacherOptions(s.teacher||'Yogi Khasha');
   openModal('series-modal');
 }
 function saveSeries(){
@@ -709,7 +718,8 @@ function saveSeries(){
     desc:document.getElementById('series-desc').value.trim(),
     classCount:parseInt(document.getElementById('series-count').value)||0,
     thumbnail:window.imgData_series||'',
-    isFree:document.getElementById('series-free').checked
+    isFree:document.getElementById('series-free').checked,
+    teacher:document.getElementById('series-teacher').value
   };
   if(!obj.title){alert('Please enter a title.');return;}
   if(id){const i=data.findIndex(x=>x.id===parseInt(id));if(i>-1)data[i]=obj;else data.push(obj);}
@@ -729,7 +739,7 @@ function openAddCourse(){
   document.getElementById('course-modal-title').textContent='Add Course';
   document.getElementById('course-id').value='';
   ['course-title','course-desc','course-price'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('course-teacher').value='Yogi Khasha';
+  document.getElementById('course-teacher').innerHTML=teacherOptions('Yogi Khasha');
   clearPickerImage('course');
   document.getElementById('modules-builder').innerHTML='';modCounter=0;addModule();
   openModal('course-modal');
@@ -741,7 +751,7 @@ function editCourse(id){
   document.getElementById('course-title').value=c.title||'';
   document.getElementById('course-desc').value=c.desc||'';
   document.getElementById('course-price').value=c.price||'';
-  document.getElementById('course-teacher').value=c.teacher||'Yogi Khasha';
+  document.getElementById('course-teacher').innerHTML=teacherOptions(c.teacher||'Yogi Khasha');
   if(c.thumbnail)setPickerImage('course',c.thumbnail);else clearPickerImage('course');
   const mb=document.getElementById('modules-builder');mb.innerHTML='';modCounter=0;
   (c.modules||[]).forEach(m=>addModule(m.title,m.lessons||[]));
