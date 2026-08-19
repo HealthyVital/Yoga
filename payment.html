@@ -87,8 +87,8 @@
     </div>
 
     <div class="order-sub" id="order-subtitle">Subscribe</div>
-    <div class="trial-head" id="trial-head">7 days free</div>
-    <div class="trial-then" id="trial-then">Then €120.00 per year<br>Starting <span id="trial-start-date"></span></div>
+    <div class="trial-head" id="trial-head">Annual Plan</div>
+    <div class="trial-then" id="trial-then">€120.00 per year · Instant access</div>
 
     <div class="order-card">
       <div class="order-row">
@@ -106,7 +106,7 @@
     </div>
 
     <div class="total-row"><span class="subtotal-label" data-i18n="pay-subtotal">Subtotal</span><span id="subtotal-val">€120.00</span></div>
-    <div class="total-row" id="after-trial-row"><span class="subtotal-label" data-i18n="pay-after-trial">Total after trial</span><span id="after-trial-val">€120.00</span></div>
+    <div class="total-row" id="after-trial-row" style="display:none"><span class="subtotal-label" data-i18n="pay-after-trial">Total</span><span id="after-trial-val">€120.00</span></div>
     <div class="divider"></div>
     <div class="total-row big"><span data-i18n="pay-due-today">Due today</span><span id="due-today" class="free-tag">€0.00</span></div>
 
@@ -197,7 +197,7 @@
 
     <div class="legal">
       By subscribing you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.<br>
-      Your subscription begins after the free trial. Cancel before <span id="cancel-date"></span> to avoid charges.
+      Your subscription begins today. Cancel anytime from your account.
     </div>
 
     <div class="stripe-footer">
@@ -257,14 +257,16 @@ if(type==='course'){
   const opts={month:'long',day:'numeric',year:'numeric'};
   const afterStr=afterDate.toLocaleDateString('en-US',opts);
   document.getElementById('order-subtitle').textContent='Subscribe to Yogi Khasha';
-  document.getElementById('trial-head').textContent='7 days free';
-  document.getElementById('trial-then').innerHTML=`Then €${price}.00 per ${isAnnual?'year':'month'}<br>Starting <span>${afterStr}</span>`;
+  document.getElementById('trial-head').textContent=isAnnual?'Annual Plan':'Monthly Plan';
+  document.getElementById('trial-then').textContent=`€${price}.00 per ${isAnnual?'year':'month'} · Instant access`;
   document.getElementById('order-name').textContent=`Yogi Khasha – ${isAnnual?'Annual':'Monthly'}`;
   document.getElementById('order-cycle').textContent=cycle;
   document.getElementById('order-price-right').textContent=`€${price}`;
   document.getElementById('subtotal-val').textContent=`€${price}.00`;
-  document.getElementById('after-trial-val').textContent=`€${price}.00`;
-  document.getElementById('cancel-date').textContent=afterStr;
+  const dueSubEl=document.getElementById('due-today');
+  dueSubEl.textContent=`€${price}.00`;
+  dueSubEl.className='';
+  dueSubEl.style.fontWeight='800';
 }
 
 // Init Stripe Elements
