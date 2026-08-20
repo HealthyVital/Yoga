@@ -209,10 +209,11 @@
 
 <script>
 // ─────────────────────────────────────────────
-// TODO: Replace with your actual Stripe Publishable Key
-// Get it at: https://dashboard.stripe.com/apikeys
-// Use pk_test_... for testing, pk_live_... for production
-const STRIPE_KEY = 'pk_test_YOUR_PUBLISHABLE_KEY_HERE';
+// Stripe Payment Links
+const STRIPE_LINKS = {
+  monthly: 'https://buy.stripe.com/3cI4gy72R8Wv5UG8V05kk01',
+  annual:  'https://buy.stripe.com/cNicN4cnb8Wv6YK3AG5kk02'
+};
 // ─────────────────────────────────────────────
 
 const params=new URLSearchParams(location.search);
@@ -267,6 +268,14 @@ if(type==='course'){
   dueSubEl.textContent=`€${price}.00`;
   dueSubEl.className='';
   dueSubEl.style.fontWeight='800';
+  // Hide card fields — payment handled by Stripe hosted page
+  const cardSection=document.querySelector('.pay-section:has(#stripe-card-number)');
+  if(cardSection)cardSection.style.display='none';
+  const nameGroup=document.getElementById('cardholder-name');
+  if(nameGroup)nameGroup.closest('.fgroup').style.display='none';
+  const saveRow=document.querySelector('.save-row');
+  if(saveRow)saveRow.style.display='none';
+  document.getElementById('btn-sub-text').textContent='Proceed to Secure Checkout →';
 }
 
 // Init Stripe Elements
@@ -303,40 +312,20 @@ function setLoading(on){
 
 async function handlePayment(){
   const email=document.getElementById('pay-email').value.trim();
-  const name=document.getElementById('cardholder-name').value.trim();
   showError('');
   if(!email){showError('Please enter your email address.');document.getElementById('pay-email').focus();return;}
-  if(!name){showError('Please enter the cardholder name.');document.getElementById('cardholder-name').focus();return;}
-  if(!stripe||!cardNumber){
-    // Demo mode: no real Stripe key configured
-    demoSuccess(email);return;
+
+  if(type!=='course'){
+    // ── SUBSCRIPTION: redirect to Stripe Payment Link ──
+    const base=STRIPE_LINKS[plan]||STRIPE_LINKS.annual;
+    const url=base+'?prefilled_email='+encodeURIComponent(email);
+    window.location.href=url;
+    return;
   }
-  setLoading(true);
-  const {paymentMethod,error}=await stripe.createPaymentMethod({
-    type:'card',card:cardNumber,
-    billing_details:{name,email}
-  });
-  if(error){showError(error.message);setLoading(false);return;}
 
-  // ─────────────────────────────────────────────────────
-  // TODO: Send paymentMethod.id to your backend to create subscription
-  // Example:
-  //   const res = await fetch('/api/subscribe', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({
-  //       paymentMethodId: paymentMethod.id,
-  //       email,
-  //       plan,           // 'annual' or 'monthly'
-  //       stripePriceId:  plan === 'annual' ? 'price_YOUR_ANNUAL_PRICE_ID' : 'price_YOUR_MONTHLY_PRICE_ID'
-  //     })
-  //   });
-  //   const result = await res.json();
-  //   if (result.error) { showError(result.error); setLoading(false); return; }
-  //   if (result.requiresAction) { ... handle 3DS ... }
-  // ─────────────────────────────────────────────────────
-
-  // Demo success (remove when backend is connected):
+  // ── COURSE: demo mode until backend connected ──
+  const name=document.getElementById('cardholder-name').value.trim();
+  if(!name){showError('Please enter the cardholder name.');document.getElementById('cardholder-name').focus();return;}
   demoSuccess(email);
 }
 

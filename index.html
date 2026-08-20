@@ -99,6 +99,7 @@
     .m-img img{width:100%;height:100%;object-fit:cover;object-position:top}
     .m-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.92);border:none;border-radius:50%;width:36px;height:36px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--font);color:#111}
     .m-body{padding:28px}
+    #signup-modal.is-member .m-body>*:not(#su-status){display:none!important}
     .m-title{font-weight:800;font-size:24px;color:var(--primary);margin-bottom:22px}
     .mbenefit{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
     .bicon{width:36px;height:36px;background:var(--primary-lightest);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -282,6 +283,7 @@
       <button class="m-close" onclick="hideSignup()">×</button>
     </div>
     <div class="m-body">
+      <div id="su-status" style="display:none"></div>
       <div class="m-title" data-i18n="modal-title">Join 3,400+ Members Worldwide</div>
       <div style="text-align:center;font-size:13px;color:#6b7280;margin:-10px 0 18px;font-weight:500" data-i18n="modal-stars"><span style="color:#f59e0b">★★★★★</span>&ensp;Start free today — no credit card needed</div>
       <div class="mbenefit"><div class="bicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><div class="btitle" data-i18n="modal-b1-title">Ancient Wisdom. Modern Results.</div><div class="bsub" data-i18n="modal-b1-sub">Five daily movements that reactivate your body's natural youth mechanisms</div></div></div>
@@ -306,7 +308,23 @@
 </div>
 
 <script>
-function showSignup(){document.getElementById('signup-modal').classList.add('on')}
+function showSignup(){
+  const u=JSON.parse(localStorage.getItem('yk_user')||'null');
+  const modal=document.getElementById('signup-modal');
+  const st=document.getElementById('su-status');
+  modal.classList.remove('is-member');
+  st.style.display='none';
+  if(u&&u.isPremium){
+    modal.classList.add('is-member');
+    st.style.cssText='display:block;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:24px 16px;text-align:center';
+    st.innerHTML='<div style="font-size:36px;margin-bottom:10px">⭐</div><div style="font-weight:800;color:#1e40af;font-size:18px;margin-bottom:6px">Ya eres miembro Premium</div><div style="color:#3b82f6;font-size:14px;margin-bottom:18px">Tienes acceso completo a Yogi Khasha.</div><button onclick="hideSignup();window.location.href=\'practice.html\'" style="background:#1e3a8a;color:#fff;border:none;padding:13px 30px;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;font-size:15px">Ver mi contenido →</button>';
+  } else if(u){
+    modal.classList.add('is-member');
+    st.style.cssText='display:block;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:24px 16px;text-align:center';
+    st.innerHTML='<div style="font-size:36px;margin-bottom:10px">🌿</div><div style="font-weight:800;color:#166534;font-size:18px;margin-bottom:6px">Hola, '+(u.firstName||'miembro')+'</div><div style="color:#16a34a;font-size:14px;margin-bottom:18px">Ya tienes una cuenta gratuita en Yogi Khasha.</div><button onclick="hideSignup();window.location.href=\'practice.html\'" style="background:#166534;color:#fff;border:none;padding:13px 30px;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;font-size:15px">Ir a mi contenido →</button><div style="margin-top:12px"><button onclick="hideSignup();window.location.href=\'payment.html?plan=annual\'" style="background:none;border:1px solid #16a34a;color:#16a34a;padding:10px 24px;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">Actualizar a Premium →</button></div>';
+  }
+  modal.classList.add('on');
+}
 function hideSignup(){document.getElementById('signup-modal').classList.remove('on')}
 document.getElementById('signup-modal').addEventListener('click',function(e){if(e.target===this)hideSignup()});
 function doSignup(){
