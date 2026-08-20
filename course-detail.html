@@ -119,7 +119,7 @@
 
 <script>
 const FULL_COURSES=[
-  {id:1,title:"Posture Revival Blueprint",teacher:"Yogi Khasha",price:25,
+  {id:1,title:"Posture Revival Blueprint",teacher:"Yogi Khasha",price:39,
    thumbnail:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?w=600&q=80",
    desc:"Three intensive sessions targeting the root cause of most physical aging: postural collapse. You will learn the precise movements to decompress the spine, reactivate dormant muscles, and restore the upright alignment your body was designed to hold — eliminating pain and adding visible years of youth to the way you stand, walk, and move. Each session is designed for home practice and requires no equipment.",
    modules:[
@@ -134,7 +134,7 @@ const FULL_COURSES=[
        {id:6,title:"Posture Integration",duration:"41 mins",thumbnail:"https://images.unsplash.com/photo-1540206395-68808572332f?w=120&q=80"}
      ]}
   ]},
-  {id:2,title:"The 5-Week Vitality Reset",teacher:"Yogi Khasha",price:33,
+  {id:2,title:"The 5-Week Vitality Reset",teacher:"Yogi Khasha",price:39,
    thumbnail:"https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80",
    desc:"The most complete transformation in the Yogi Khasha library. Over five weeks, you will systematically restore every dimension of your physical youth — circulation, stamina, spinal flexibility, hormonal vitality, and energy flow. Built on the same five movement principles practiced in ancient traditions for centuries, now adapted for the modern body and modern life.",
    modules:[
@@ -148,7 +148,7 @@ const FULL_COURSES=[
        {id:5,title:"Rest & Recovery Practice",duration:"22 mins",thumbnail:"https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=120&q=80"}
      ]}
   ]},
-  {id:3,title:"Spinal Youth Program",teacher:"Yogi Khasha",price:23,
+  {id:3,title:"Spinal Youth Program",teacher:"Yogi Khasha",price:39,
    thumbnail:"https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=600&q=80",
    desc:"The spine doesn't just support your body — it IS your body's age. A supple, decompressed spine radiates youth outward to every limb, organ, and system. This targeted program gives you a complete spinal maintenance toolkit: how to decompress it daily, how to rebuild its strength, and how to keep it feeling effortlessly young for the rest of your life.",
    modules:[
@@ -206,10 +206,9 @@ function render(){
 function buyNow(){
   const u=getUser();
   if(u&&u.isPremium){alert('You already have premium access!');return;}
-  const fc=FULL_COURSES.find(c=>c.id===getCourseId())||FULL_COURSES[0];
   const email=u?u.email||'':'';
-  localStorage.setItem('yk_pending',JSON.stringify({email,type:'course',courseId:fc.id,price:fc.price}));
-  window.location.href='payment.html?type=course&id='+fc.id+'&price='+fc.price+'&name='+encodeURIComponent(fc.title)+(email?'&email='+encodeURIComponent(email):'');
+  const base='https://buy.stripe.com/eVq7sKfznfkTercefk5kk04';
+  window.location.href=base+(email?'?prefilled_email='+encodeURIComponent(email):'');
 }
 function openLesson(id){buyNow();}
 function closeSub(){}

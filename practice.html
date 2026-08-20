@@ -133,7 +133,7 @@
   <div class="card-grid" id="classes-grid"></div>
 
   <!-- SERIES -->
-  <div class="sec-head" style="margin-top:48px">
+  <div id="series-section" class="sec-head" style="margin-top:48px">
     <div class="sec-title" data-i18n="sec-series">Series</div>
     <button class="btn-viewall" onclick="toggleViewAll('series-grid','series-toggle')" data-i18n="btn-viewall">View all</button>
   </div>
@@ -343,8 +343,9 @@ function selectPlan(p){
 function startTrial(){
   const email=document.getElementById('sub-email').value.trim();
   if(!email){document.getElementById('sub-email').focus();return;}
-  localStorage.setItem('yk_pending',JSON.stringify({email,plan:selPlan}));
-  window.location.href='payment.html?plan='+selPlan+'&email='+encodeURIComponent(email);
+  const links={monthly:'https://buy.stripe.com/3cI4gy72R8Wv5UG8V05kk01',annual:'https://buy.stripe.com/cNicN4cnb8Wv6YK3AG5kk02'};
+  window.location.href=(links[selPlan]||links.annual)+'?prefilled_email='+encodeURIComponent(email);
+}
 }
 document.getElementById('sub-modal').addEventListener('click',function(e){if(e.target===this)closeSub()});
 
