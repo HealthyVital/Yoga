@@ -297,7 +297,6 @@ function startTrial(){
   const links={monthly:'https://buy.stripe.com/3cI4gy72R8Wv5UG8V05kk01',annual:'https://buy.stripe.com/cNicN4cnb8Wv6YK3AG5kk02'};
   window.location.href=(links[selPlan]||links.annual)+'?prefilled_email='+encodeURIComponent(email);
 }
-}
 document.getElementById('sub-modal').addEventListener('click',function(e){if(e.target===this)closeSub()});
 
 function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
