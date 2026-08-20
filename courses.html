@@ -138,8 +138,9 @@ function getUser(){try{return JSON.parse(localStorage.getItem('yk_user'));}catch
 function renderCourses(){
   const grid=document.getElementById('courses-grid');
   const saved=JSON.parse(localStorage.getItem('yk_courses')||'null');
-  const data=saved||COURSES;
-  if(!localStorage.getItem('yk_courses'))localStorage.setItem('yk_courses',JSON.stringify(COURSES));
+  // Always sync prices from source; merge admin-editable fields (title, desc, thumbnail) but force price
+  const data=(saved||COURSES).map(c=>{const base=COURSES.find(x=>x.id===c.id)||c;return {...c,price:base.price};});
+  localStorage.setItem('yk_courses',JSON.stringify(data));
   grid.innerHTML=data.map(c=>`
     <div class="ccard" onclick="openCourse(${c.id})">
       <div class="cthumb">
