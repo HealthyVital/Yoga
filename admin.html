@@ -677,8 +677,12 @@ function renderPhotos(){
 function savePhotos(){
   const stored=getData('yk_site_imgs',{});
   PHOTO_SLOTS.forEach(s=>{if(window['imgData_'+s.id])stored[s.id]=window['imgData_'+s.id];});
-  setData('yk_site_imgs',stored);
-  alert('✓ Photos saved! Reload the site pages to see the changes.');
+  try{
+    setData('yk_site_imgs',stored);
+    alert('✓ Photos saved! Reload the site pages to see the changes.');
+  }catch(e){
+    alert('⚠️ No se pudo guardar: almacenamiento lleno. Usa una URL de imagen en lugar de subir un archivo.');
+  }
 }
 
 function renderClasses(){
@@ -798,6 +802,7 @@ function showPickerPreview(src){
 function fileSelected(e){
   const file=e.target.files[0];
   if(!file)return;
+  if(file.size>400000){alert('⚠️ Imagen demasiado grande ('+Math.round(file.size/1024)+'KB). Usa una URL de imagen en su lugar, o comprime la imagen a menos de 400KB.');e.target.value='';return;}
   const reader=new FileReader();
   reader.onload=ev=>{showPickerPreview(ev.target.result);};
   reader.readAsDataURL(file);

@@ -248,7 +248,7 @@ if(type==='course'){
   dueEl.style.fontWeight='800';
   document.getElementById('btn-sub-text').textContent='Pay €'+price.toFixed(2);
   document.querySelector('.legal').innerHTML='By purchasing you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. Instant lifetime access upon payment.';
-  document.getElementById('cancel-date').closest('.legal').removeAttribute('id');
+  const _cde=document.getElementById('cancel-date');if(_cde)_cde.closest('.legal').removeAttribute('id');
 } else {
   // ── SUBSCRIPTION MODE ──
   const isAnnual=plan==='annual';

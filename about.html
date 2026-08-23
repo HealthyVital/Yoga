@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>About – Yogi Khasha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <script src="lang.js"></script>
+  <style>
+    :root{--p:#1e3a8a;--pm:#2563eb;--ph:#1e40af;--pl:#dbeafe;--pll:#eff6ff;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--f:'Open Sans',sans-serif;--nh:64px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);color:var(--txt);background:#fff}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);border-bottom:1px solid var(--pl);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:var(--nh)}
+    .nav-logo{font-weight:900;font-size:16px;color:var(--p);letter-spacing:.06em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:24px}
+    .nav-link{color:#4b5563;font-weight:500;text-decoration:none;font-size:15px}
+    .nav-link:hover{color:var(--p);font-weight:700}
+    .btn-nav{background:var(--p);color:#fff;padding:9px 22px;border-radius:9999px;font-weight:600;border:none;cursor:pointer;font-size:14px;font-family:var(--f)}
+    .btn-nav:hover{background:var(--ph)}
+    .ham-wrap{position:relative}
+    .nav-ham{background:none;border:none;cursor:pointer;padding:6px;display:flex}
+    .ham-drop{display:none;position:absolute;top:calc(100% + 12px);right:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.14);min-width:220px;padding:8px 0;z-index:300}
+    .ham-drop.open{display:block}
+    .ham-item{display:flex;align-items:center;gap:12px;padding:11px 20px;color:var(--txt);text-decoration:none;font-size:15px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;font-family:var(--f);text-align:left}
+    .ham-item:hover{background:var(--pll)}
+    .ham-div{height:1px;background:var(--bd);margin:6px 0}
+
+    /* HERO */
+    .hero{position:relative;min-height:520px;display:flex;align-items:center;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#1d4ed8 100%);overflow:hidden;margin-top:var(--nh)}
+    .hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1400&q=80') center/cover no-repeat;opacity:.18}
+    .hero-inner{position:relative;max-width:900px;margin:0 auto;padding:80px 32px;text-align:center;color:#fff}
+    .hero-eyebrow{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#bfdbfe;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 18px;border-radius:99px;margin-bottom:24px}
+    .hero-title{font-size:clamp(28px,5vw,50px);font-weight:900;line-height:1.18;margin-bottom:20px;color:#fff}
+    .hero-title em{color:#93c5fd;font-style:normal}
+    .hero-sub{font-size:17px;line-height:1.75;color:#cbd5e1;max-width:640px;margin:0 auto 36px}
+    .hero-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid rgba(255,255,255,.3);margin-bottom:16px;display:block;margin-left:auto;margin-right:auto}
+
+    /* STATS BAR */
+    .stats-bar{background:#fff;border-bottom:1px solid var(--bd);padding:28px 32px}
+    .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center}
+    .stat-num{font-size:36px;font-weight:900;color:var(--p);line-height:1}
+    .stat-label{font-size:13px;color:var(--tg);margin-top:4px;font-weight:500}
+
+    /* SECTION */
+    .section{padding:72px 32px;max-width:1100px;margin:0 auto}
+    .section-eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pm);margin-bottom:10px}
+    .section-title{font-size:clamp(24px,3.5vw,36px);font-weight:900;color:var(--p);line-height:1.2;margin-bottom:20px}
+    .section-body{font-size:16px;color:var(--ts);line-height:1.85}
+    .section-body p{margin-bottom:16px}
+    .section-body p:last-child{margin-bottom:0}
+
+    /* STORY GRID */
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .story-img{border-radius:20px;overflow:hidden;aspect-ratio:4/5}
+    .story-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+    /* PHILOSOPHY */
+    .philosophy-bg{background:var(--pll);padding:72px 32px}
+    .philosophy-inner{max-width:1100px;margin:0 auto}
+    .moves-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:40px}
+    .move-card{background:#fff;border-radius:16px;padding:24px 18px;text-align:center;border:1px solid var(--pl);transition:box-shadow .2s,transform .15s}
+    .move-card:hover{box-shadow:0 8px 28px rgba(30,58,138,.12);transform:translateY(-4px)}
+    .move-num{width:40px;height:40px;border-radius:50%;background:var(--p);color:#fff;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+    .move-name{font-weight:800;font-size:15px;color:var(--p);margin-bottom:8px}
+    .move-desc{font-size:13px;color:var(--tg);line-height:1.6}
+
+    /* QUOTE STRIP */
+    .quote-strip{background:var(--p);padding:60px 32px;text-align:center}
+    .quote-text{font-size:clamp(20px,3vw,30px);font-weight:800;color:#fff;line-height:1.4;max-width:760px;margin:0 auto 16px;font-style:italic}
+    .quote-author{font-size:14px;color:#93c5fd;font-weight:600}
+
+    /* CTA */
+    .cta-section{padding:80px 32px;text-align:center;background:#fff}
+    .cta-title{font-size:clamp(24px,3.5vw,38px);font-weight:900;color:var(--p);margin-bottom:14px}
+    .cta-sub{font-size:16px;color:var(--tg);margin-bottom:32px}
+    .btn-cta{display:inline-block;background:var(--p);color:#fff;padding:17px 44px;border-radius:12px;font-weight:800;font-size:17px;text-decoration:none;transition:background .2s,transform .15s}
+    .btn-cta:hover{background:var(--ph);transform:translateY(-2px)}
+    .btn-cta-sec{display:inline-block;border:2px solid var(--p);color:var(--p);padding:15px 36px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;margin-left:16px;transition:all .2s}
+    .btn-cta-sec:hover{background:var(--pll)}
+
+    @media(max-width:900px){
+      .story-grid{grid-template-columns:1fr}
+      .story-img{aspect-ratio:16/9}
+      .moves-grid{grid-template-columns:repeat(2,1fr)}
+      .moves-grid .move-card:last-child{grid-column:1/-1}
+    }
+    @media(max-width:640px){
+      .nav-link{display:none}
+      .section,.cta-section{padding:48px 16px}
+      .philosophy-bg{padding:48px 16px}
+      .hero-inner{padding:56px 16px}
+      .stats-bar{padding:24px 16px}
+      .btn-cta-sec{display:block;margin:12px auto 0;width:fit-content}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">YOGI KHASHA</a>
+  <div class="nav-right">
+    <a href="practice.html" class="nav-link">Practice</a>
+    <a href="courses.html" class="nav-link">Courses</a>
+    <button class="btn-nav" id="nav-btn" onclick="window.location.href='index.html'">Join Free</button>
+    <div class="ham-wrap">
+      <button class="nav-ham" onclick="toggleHam(event)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="ham-drop" id="ham-drop">
+        <a href="badges.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19l3-3 3 3"/></svg>Badges</a>
+        <a href="mailto:Yogi_Khasha@proton.me" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
+        <a href="privacy.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
+        <a href="terms.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
+        <a href="about.html" class="ham-item" style="color:var(--p);font-weight:600"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <div class="ham-div"></div>
+        <button class="ham-item" onclick="handleHamLogin()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg><span id="ham-login-txt">Log In</span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== ENGLISH ===================== -->
+<div id="lang-en">
+
+<section class="hero">
+  <div class="hero-inner">
+    <img id="teacher-photo-en" src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=80" alt="Yogi Khasha" class="hero-photo"/>
+    <div class="hero-eyebrow">About the Teacher</div>
+    <h1 class="hero-title">I believe your body can feel<br><em>20 years younger</em> — at any age.</h1>
+    <p class="hero-sub">Yogi Khasha is a movement teacher with over 21 years of dedicated practice, committed to one mission: helping adults reclaim the body they thought they had lost.</p>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-num">21+</div><div class="stat-label">Years of Practice</div></div>
+    <div><div class="stat-num">5</div><div class="stat-label">Core Movements</div></div>
+    <div><div class="stat-num">12k+</div><div class="stat-label">Students Worldwide</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="story-grid">
+    <div>
+      <div class="section-eyebrow">The Story</div>
+      <h2 class="section-title">From ancient practice to modern longevity</h2>
+      <div class="section-body">
+        <p>After two decades studying yoga, movement therapy, and longevity science across three continents, Yogi Khasha developed a five-movement system that addresses the root cause of physical aging — not just the symptoms.</p>
+        <p>The practice is not about flexibility. It is not about perfection or extreme postures. It is about systematically reversing the patterns that make a body feel old: compression, stagnation, muscular weakness, and disconnection from breath.</p>
+        <p>Every class is short, focused, and designed to produce a noticeable physical shift. In 20 to 40 minutes, students consistently report feeling taller, lighter, and more energized than before they started.</p>
+        <p>This is not a trend. It is an ancient system, refined for the modern body.</p>
+      </div>
+    </div>
+    <div class="story-img">
+      <img id="teacher-story-en" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Yogi Khasha practice"/>
+    </div>
+  </div>
+</div>
+
+<div class="philosophy-bg">
+  <div class="philosophy-inner">
+    <div style="text-align:center;margin-bottom:12px"><span class="section-eyebrow">The Method</span></div>
+    <h2 class="section-title" style="text-align:center">The 5 Core Movements</h2>
+    <p style="text-align:center;color:var(--tg);font-size:15px;max-width:580px;margin:0 auto">Every session is built on these five principles. Together, they restore what modern life takes away.</p>
+    <div class="moves-grid">
+      <div class="move-card"><div class="move-num">1</div><div class="move-name">Decompress</div><div class="move-desc">Release spinal compression. Restore height, ease, and freedom to every movement.</div></div>
+      <div class="move-card"><div class="move-num">2</div><div class="move-name">Activate</div><div class="move-desc">Wake dormant muscles. Rebuild the deep support system your posture and energy depend on.</div></div>
+      <div class="move-card"><div class="move-num">3</div><div class="move-name">Expand</div><div class="move-desc">Open the chest, shoulders, and breath. Increase oxygen, vitality, and emotional capacity.</div></div>
+      <div class="move-card"><div class="move-num">4</div><div class="move-name">Flow</div><div class="move-desc">Connect movement with breath. Stimulate circulation, energy, and the nervous system.</div></div>
+      <div class="move-card"><div class="move-num">5</div><div class="move-name">Restore</div><div class="move-desc">Integrate and recover deeply. Signal your body that it is safe to be young again.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="quote-strip">
+  <div class="quote-text">"The body does not age. It accumulates patterns. Change the patterns, and the body changes."</div>
+  <div class="quote-author">— Yogi Khasha</div>
+</div>
+
+<div class="cta-section">
+  <div class="section-eyebrow" style="text-align:center">Start Today</div>
+  <div class="cta-title">Your ageless body is waiting.</div>
+  <div class="cta-sub">Join thousands of students who practice daily with Yogi Khasha. Free to start, no equipment needed.</div>
+  <a href="practice.html" class="btn-cta">Start Practicing Free</a>
+  <a href="courses.html" class="btn-cta-sec">Explore Courses</a>
+</div>
+
+</div><!-- /lang-en -->
+
+<!-- ===================== SPANISH ===================== -->
+<div id="lang-es" style="display:none">
+
+<section class="hero">
+  <div class="hero-inner">
+    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=80" alt="Yogi Khasha" class="hero-photo"/>
+    <div class="hero-eyebrow">Sobre el Instructor</div>
+    <h1 class="hero-title">Creo que tu cuerpo puede sentirse<br><em>20 años más joven</em> — a cualquier edad.</h1>
+    <p class="hero-sub">Yogi Khasha es un instructor de movimiento con más de 21 años de práctica dedicada, comprometido con una sola misión: ayudarte a recuperar el cuerpo que creías haber perdido.</p>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-num">21+</div><div class="stat-label">Años de Práctica</div></div>
+    <div><div class="stat-num">5</div><div class="stat-label">Movimientos Esenciales</div></div>
+    <div><div class="stat-num">12k+</div><div class="stat-label">Estudiantes en el Mundo</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="story-grid">
+    <div>
+      <div class="section-eyebrow">La Historia</div>
+      <h2 class="section-title">De la práctica ancestral a la longevidad moderna</h2>
+      <div class="section-body">
+        <p>Tras dos décadas estudiando yoga, terapia de movimiento y ciencia de la longevidad en tres continentes, Yogi Khasha desarrolló un sistema de cinco movimientos que aborda la raíz del envejecimiento físico — no solo sus síntomas.</p>
+        <p>Esta práctica no se trata de flexibilidad. No se trata de posturas extremas ni de perfección. Se trata de revertir sistemáticamente los patrones que hacen que un cuerpo se sienta viejo: compresión, estancamiento, debilidad muscular y desconexión de la respiración.</p>
+        <p>Cada clase es breve, enfocada y diseñada para producir un cambio físico perceptible. En 20 a 40 minutos, los estudiantes reportan sentirse más altos, más ligeros y con más energía que antes de comenzar.</p>
+        <p>Esto no es una moda. Es un sistema ancestral perfeccionado para el cuerpo moderno.</p>
+      </div>
+    </div>
+    <div class="story-img">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Yogi Khasha práctica"/>
+    </div>
+  </div>
+</div>
+
+<div class="philosophy-bg">
+  <div class="philosophy-inner">
+    <div style="text-align:center;margin-bottom:12px"><span class="section-eyebrow">El Método</span></div>
+    <h2 class="section-title" style="text-align:center">Los 5 Movimientos Esenciales</h2>
+    <p style="text-align:center;color:var(--tg);font-size:15px;max-width:580px;margin:0 auto">Cada sesión se construye sobre estos cinco principios. Juntos, restauran lo que la vida moderna nos quita.</p>
+    <div class="moves-grid">
+      <div class="move-card"><div class="move-num">1</div><div class="move-name">Descomprimir</div><div class="move-desc">Libera la compresión espinal. Restaura la altura, la ligereza y la libertad de movimiento.</div></div>
+      <div class="move-card"><div class="move-num">2</div><div class="move-name">Activar</div><div class="move-desc">Despierta músculos dormidos. Reconstruye el soporte profundo del que dependen tu postura y tu energía.</div></div>
+      <div class="move-card"><div class="move-num">3</div><div class="move-name">Expandir</div><div class="move-desc">Abre el pecho, los hombros y la respiración. Aumenta el oxígeno, la vitalidad y la capacidad emocional.</div></div>
+      <div class="move-card"><div class="move-num">4</div><div class="move-name">Fluir</div><div class="move-desc">Conecta movimiento y respiración. Estimula la circulación, la energía y el sistema nervioso.</div></div>
+      <div class="move-card"><div class="move-num">5</div><div class="move-name">Restaurar</div><div class="move-desc">Integra y recupera profundamente. Señala a tu cuerpo que es seguro volver a ser joven.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="quote-strip">
+  <div class="quote-text">"El cuerpo no envejece. Acumula patrones. Cambia los patrones y el cuerpo cambia."</div>
+  <div class="quote-author">— Yogi Khasha</div>
+</div>
+
+<div class="cta-section">
+  <div class="section-eyebrow" style="text-align:center">Comienza Hoy</div>
+  <div class="cta-title">Tu cuerpo atemporal te espera.</div>
+  <div class="cta-sub">Únete a miles de estudiantes que practican diariamente con Yogi Khasha. Gratis para comenzar, sin equipamiento necesario.</div>
+  <a href="practice.html" class="btn-cta">Comenzar a Practicar Gratis</a>
+  <a href="courses.html" class="btn-cta-sec">Explorar Cursos</a>
+</div>
+
+</div><!-- /lang-es -->
+
+<!-- ===================== GERMAN ===================== -->
+<div id="lang-de" style="display:none">
+
+<section class="hero">
+  <div class="hero-inner">
+    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&q=80" alt="Yogi Khasha" class="hero-photo"/>
+    <div class="hero-eyebrow">Über den Lehrer</div>
+    <h1 class="hero-title">Ich glaube, dein Körper kann sich<br><em>20 Jahre jünger</em> anfühlen — in jedem Alter.</h1>
+    <p class="hero-sub">Yogi Khasha ist ein Bewegungslehrer mit über 21 Jahren engagierter Praxis — mit einer einzigen Mission: dir zu helfen, den Körper zurückzugewinnen, den du glaubtest verloren zu haben.</p>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-num">21+</div><div class="stat-label">Jahre Praxis</div></div>
+    <div><div class="stat-num">5</div><div class="stat-label">Kernbewegungen</div></div>
+    <div><div class="stat-num">12k+</div><div class="stat-label">Schüler weltweit</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="story-grid">
+    <div>
+      <div class="section-eyebrow">Die Geschichte</div>
+      <h2 class="section-title">Von alter Weisheit zur modernen Langlebigkeit</h2>
+      <div class="section-body">
+        <p>Nach zwei Jahrzehnten Studium von Yoga, Bewegungstherapie und Langlebigkeitswissenschaft auf drei Kontinenten entwickelte Yogi Khasha ein System aus fünf Bewegungen, das die Wurzel des körperlichen Alterns angeht — nicht nur die Symptome.</p>
+        <p>Diese Praxis dreht sich nicht um Flexibilität. Nicht um extreme Posen oder Perfektion. Sie geht darum, die Muster systematisch umzukehren, die einen Körper alt fühlen lassen: Kompression, Stagnation, Muskelschwäche und die Trennung von der Atmung.</p>
+        <p>Jede Klasse ist kurz, fokussiert und darauf ausgelegt, eine spürbare körperliche Veränderung zu bewirken. In 20 bis 40 Minuten berichten Schüler durchgehend, dass sie sich größer, leichter und energiegeladener fühlen als zuvor.</p>
+        <p>Das ist kein Trend. Es ist ein uraltes System, verfeinert für den modernen Körper.</p>
+      </div>
+    </div>
+    <div class="story-img">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Yogi Khasha Praxis"/>
+    </div>
+  </div>
+</div>
+
+<div class="philosophy-bg">
+  <div class="philosophy-inner">
+    <div style="text-align:center;margin-bottom:12px"><span class="section-eyebrow">Die Methode</span></div>
+    <h2 class="section-title" style="text-align:center">Die 5 Kernbewegungen</h2>
+    <p style="text-align:center;color:var(--tg);font-size:15px;max-width:580px;margin:0 auto">Jede Einheit basiert auf diesen fünf Prinzipien. Gemeinsam geben sie das zurück, was das moderne Leben uns nimmt.</p>
+    <div class="moves-grid">
+      <div class="move-card"><div class="move-num">1</div><div class="move-name">Dekomprimieren</div><div class="move-desc">Befreie die Wirbelsäule. Stelle Größe, Leichtigkeit und Freiheit in jeder Bewegung wieder her.</div></div>
+      <div class="move-card"><div class="move-num">2</div><div class="move-name">Aktivieren</div><div class="move-desc">Wecke schlafende Muskeln. Baue das tiefe Stützsystem wieder auf, das Haltung und Energie trägt.</div></div>
+      <div class="move-card"><div class="move-num">3</div><div class="move-name">Erweitern</div><div class="move-desc">Öffne Brust, Schultern und Atemraum. Steigere Sauerstoff, Vitalität und emotionale Kapazität.</div></div>
+      <div class="move-card"><div class="move-num">4</div><div class="move-name">Fließen</div><div class="move-desc">Verbinde Bewegung mit Atem. Stimuliere Kreislauf, Energie und das Nervensystem.</div></div>
+      <div class="move-card"><div class="move-num">5</div><div class="move-name">Regenerieren</div><div class="move-desc">Integriere und erhole dich tief. Gib deinem Körper das Signal, dass es sicher ist, wieder jung zu sein.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="quote-strip">
+  <div class="quote-text">„Der Körper altert nicht. Er sammelt Muster. Ändere die Muster, und der Körper verändert sich."</div>
+  <div class="quote-author">— Yogi Khasha</div>
+</div>
+
+<div class="cta-section">
+  <div class="section-eyebrow" style="text-align:center">Starte Heute</div>
+  <div class="cta-title">Dein zeitloser Körper wartet auf dich.</div>
+  <div class="cta-sub">Schließ dich Tausenden von Schülern an, die täglich mit Yogi Khasha üben. Kostenlos zu beginnen, keine Ausrüstung nötig.</div>
+  <a href="practice.html" class="btn-cta">Kostenlos Üben Beginnen</a>
+  <a href="courses.html" class="btn-cta-sec">Kurse Entdecken</a>
+</div>
+
+</div><!-- /lang-de -->
+
+<footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Powered by Yogi Khasha</div>
+    <div style="font-size:12px;opacity:.7;margin-bottom:14px">All content © 2026 © Multi Yoga Style &nbsp;·&nbsp; All rights reserved.</div>
+    <div style="display:flex;gap:28px;justify-content:center;font-size:14px">
+      <a href="mailto:Yogi_Khasha@proton.me" style="color:#93c5fd;text-decoration:none">Yogi_Khasha@proton.me</a>
+      <a href="terms.html" style="color:#93c5fd;text-decoration:none">Terms</a>
+      <a href="privacy.html" style="color:#93c5fd;text-decoration:none">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const L=localStorage.getItem('yk_lang')||'en';
+['en','es','de'].forEach(l=>{const el=document.getElementById('lang-'+l);if(el)el.style.display=l===L?'':'none';});
+try{const si=JSON.parse(localStorage.getItem('yk_site_imgs')||'{}');if(si.p_teacher){['teacher-photo-en','teacher-story-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.src=si.p_teacher;});}}catch(e){}
+function getUser(){try{return JSON.parse(localStorage.getItem('yk_user'));}catch(e){return null;}}
+function updateNav(){const u=getUser();const btn=document.getElementById('nav-btn');if(u&&btn){btn.textContent=u.firstName||'My Account';}const lt=document.getElementById('ham-login-txt');if(lt)lt.textContent=u?'Log Out':'Log In';}
+function handleHamLogin(){const u=getUser();if(u){localStorage.removeItem('yk_user');location.reload();}else window.location.href='index.html';}
+function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
+document.addEventListener('click',()=>document.getElementById('ham-drop').classList.remove('open'));
+updateNav();
+</script>
+</body>
+</html>

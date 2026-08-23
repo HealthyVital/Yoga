@@ -84,15 +84,15 @@
         <a href="mailto:Yogi_Khasha@proton.me" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
         <a href="privacy.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
         <a href="terms.html" class="ham-item" style="color:var(--p);font-weight:600"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
-        <a href="#" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <a href="about.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
         <div class="ham-div"></div>
-        <button class="ham-item" onclick="window.location.href='index.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Log In</button>
+        <button class="ham-item" id="ham-login-btn" onclick="handleHamLogin()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg><span id="ham-login-txt">Log In</span></button>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="page-wrap">
+<div class="page-wrap" id="t-en">
 
   <div class="page-eyebrow">Legal</div>
   <h1 class="page-title">Terms of Service</h1>
@@ -263,9 +263,239 @@
 
 </div>
 
+<!-- =================== ESPAÑOL =================== -->
+<div class="page-wrap" id="t-es" style="display:none">
+  <div class="page-eyebrow">Legal</div>
+  <h1 class="page-title">Términos de Servicio</h1>
+  <div class="page-date">Última actualización: agosto 2026 &nbsp;·&nbsp; Yogi Khasha</div>
+  <div class="intro">Bienvenido/a a Yogi Khasha, donde ofrecemos clases de yoga y movimiento en línea, series, cursos y contenido exclusivo. Lee detenidamente estos términos antes de utilizar la plataforma. Al acceder o usar Yogi Khasha, aceptas quedar sujeto/a a ellos.</div>
+  <div class="tos-section">
+    <div class="tos-num">1</div>
+    <div class="tos-title">Membresía y Suscripción</div>
+    <div class="tos-body">
+      <div class="highlight-box"><b>Prueba Gratuita:</b> Nuevos miembros reciben <b>7 días gratis</b> al suscribirse al plan mensual (€15/mes) o anual (€120/año).<br><br><b>Plan Anual con Descuento:</b> Sin prueba gratuita, pero incluye <b>garantía de reembolso de 7 días</b>.</div>
+      <ul>
+        <li>Al finalizar la prueba, el plan se cobra automáticamente con el método de pago registrado.</li>
+        <li>Las membresías se <strong>renuevan automáticamente</strong> cada ciclo salvo cancelación previa.</li>
+        <li>Puedes cancelar en cualquier momento. Los cargos procesados no son reembolsables salvo dentro de la garantía de 7 días.</li>
+        <li>Yogi Khasha puede modificar precios con aviso previo razonable.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">2</div>
+    <div class="tos-title">Responsabilidad</div>
+    <div class="tos-body">
+      <p>La plataforma Yogi Khasha opera de forma independiente y cuenta con seguro de responsabilidad civil.</p>
+      <p>Al participar en cualquier clase o programa — en línea o presencial — <strong>asumes plena responsabilidad por cualquier lesión o daño</strong>. Yogi Khasha y sus instructores no son responsables de reclamos derivados de tu participación.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">3</div>
+    <div class="tos-title">Salud y Seguridad</div>
+    <div class="tos-body">
+      <p>Las clases implican actividad física. <strong>Consulta a un médico antes de iniciar cualquier programa</strong>, especialmente si tienes condiciones médicas preexistentes.</p>
+      <ul>
+        <li>Confirmas ser física y mentalmente capaz de realizar los ejercicios.</li>
+        <li>Asumes responsabilidad por tu salud y seguridad durante la práctica.</li>
+        <li>Ante cualquier dolor, malestar o síntoma inusual, detendrás la práctica y buscarás atención médica.</li>
+      </ul>
+      <p>Los instructores brindan orientación general de bienestar — no son médicos y nada aquí constituye asesoramiento médico.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">4</div>
+    <div class="tos-title">Pagos</div>
+    <div class="tos-body">
+      <p>Todos los precios se muestran claramente al momento de la compra. Los pagos se procesan de forma segura a través de <strong>Stripe</strong>.</p>
+      <ul>
+        <li>Las tarifas se pagan por adelantado.</li>
+        <li>Los cursos individuales son cargos únicos con acceso de por vida.</li>
+        <li>Los precios están en euros (€). Los cargos de conversión de divisas son responsabilidad del banco del miembro.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">5</div>
+    <div class="tos-title">Propiedad Intelectual</div>
+    <div class="tos-body">
+      <p>Todo el contenido — videos, series, cursos, imágenes, textos — es <strong>propiedad exclusiva de Yogi Khasha</strong> y está protegido por derechos de autor.</p>
+      <ul>
+        <li>No está permitido copiar, reproducir, distribuir ni transmitir contenido sin permiso escrito.</li>
+        <li>Tu membresía te otorga una licencia personal e intransferible solo para uso privado no comercial.</li>
+        <li>Los videos están marcados con datos de identidad del miembro. La distribución no autorizada es rastreable y puede resultar en cancelación de cuenta y acciones legales.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">7</div>
+    <div class="tos-title">Privacidad</div>
+    <div class="tos-body">
+      <p>Solo recopilamos información necesaria: nombre, correo y datos de pago (gestionados por Stripe — sin guardar números de tarjeta). No vendemos ni compartimos tus datos sin consentimiento.</p>
+      <p>Consulta nuestra <a href="privacy.html">Política de Privacidad</a> para más detalles.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">8</div>
+    <div class="tos-title">Cancelaciones y Reembolsos</div>
+    <div class="tos-body">
+      <p><strong>Membresías:</strong> Cancela en cualquier momento. La cancelación aplica al fin del ciclo actual. No hay reembolsos por período ya pagado, excepto la garantía de 7 días.</p>
+      <p><strong>Sesiones presenciales:</strong> Reembolso completo con <strong>24 horas de anticipación</strong>. Sin reembolso dentro de las 24 horas.</p>
+      <p><strong>Cursos y sesiones en línea:</strong> Sin reembolso una vez concedido el acceso o iniciada la sesión.</p>
+      <p>Solicitudes dentro del período elegible: <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a></p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">9</div>
+    <div class="tos-title">Conducta del Miembro</div>
+    <div class="tos-body">
+      <p>Queda estrictamente prohibido: compartir credenciales, grabar o distribuir contenido, intentar eludir protecciones técnicas, y cualquier conducta abusiva o acosadora.</p>
+      <p>Las infracciones pueden resultar en cancelación inmediata de cuenta sin reembolso y posibles acciones legales.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">10</div>
+    <div class="tos-title">Modificaciones</div>
+    <div class="tos-body">
+      <p>Podemos actualizar estos términos en cualquier momento. Los cambios importantes se notificarán por correo a miembros activos. El uso continuado de la plataforma implica aceptación de los términos actualizados.</p>
+    </div>
+  </div>
+  <div class="signature">
+    <div class="sig-name">Yogi Khasha</div>
+    <div class="sig-title">Plataforma Online de Yoga y Movimiento</div>
+    <div class="sig-contact">¿Preguntas? <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a></div>
+  </div>
+</div>
+
+<!-- =================== DEUTSCH =================== -->
+<div class="page-wrap" id="t-de" style="display:none">
+  <div class="page-eyebrow">Rechtliches</div>
+  <h1 class="page-title">Nutzungsbedingungen</h1>
+  <div class="page-date">Zuletzt aktualisiert: August 2026 &nbsp;·&nbsp; Yogi Khasha</div>
+  <div class="intro">Willkommen bei Yogi Khasha. Bitte lies die folgenden Bedingungen sorgfältig durch, bevor du die Plattform nutzt. Durch den Zugriff auf oder die Nutzung von Yogi Khasha stimmst du diesen Bedingungen zu.</div>
+  <div class="tos-section">
+    <div class="tos-num">1</div>
+    <div class="tos-title">Mitgliedschaft und Abonnement</div>
+    <div class="tos-body">
+      <div class="highlight-box"><b>Kostenlose Testphase:</b> Neue Mitglieder erhalten <b>7 Tage kostenlos</b> beim Monats- (€15/Monat) oder Jahresabo (€120/Jahr).<br><br><b>Vergünstigtes Jahresabo:</b> Ohne Testphase, aber mit <b>7 Tagen Geld-zurück-Garantie</b>.</div>
+      <ul>
+        <li>Nach der Testphase wird der gewählte Plan automatisch abgerechnet.</li>
+        <li>Abonnements verlängern sich <strong>automatisch</strong> am Ende jedes Zyklus, sofern nicht gekündigt.</li>
+        <li>Du kannst jederzeit kündigen. Bereits gebuchte Zeiträume sind nicht erstattungsfähig, außer im Rahmen der 7-Tage-Garantie.</li>
+        <li>Preisänderungen werden aktiven Mitgliedern rechtzeitig mitgeteilt.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">2</div>
+    <div class="tos-title">Haftung</div>
+    <div class="tos-body">
+      <p>Yogi Khasha ist unabhängig betrieben und betriebshaftpflichtversichert.</p>
+      <p>Durch die Teilnahme an Kursen oder Programmen — online oder in Präsenz — <strong>übernimmst du die volle Verantwortung für mögliche Verletzungen oder Schäden</strong>. Yogi Khasha und seine Lehrer haften nicht für Ansprüche aus deiner Teilnahme.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">3</div>
+    <div class="tos-title">Gesundheit und Sicherheit</div>
+    <div class="tos-body">
+      <p>Unsere Kurse beinhalten körperliche Aktivität. <strong>Konsultiere vor Beginn einen Arzt</strong>, besonders bei Vorerkrankungen.</p>
+      <ul>
+        <li>Du bestätigst, körperlich und geistig in der Lage zu sein, die Übungen durchzuführen.</li>
+        <li>Du übernimmst die volle Verantwortung für deine Gesundheit und Sicherheit.</li>
+        <li>Bei Schmerzen, Schwindel oder ungewöhnlichen Symptomen hörst du sofort auf und holst ärztlichen Rat.</li>
+      </ul>
+      <p>Unsere Lehrer geben allgemeine Wellness-Anleitungen — sie sind keine Ärzte, und nichts hier stellt medizinischen Rat dar.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">4</div>
+    <div class="tos-title">Zahlung</div>
+    <div class="tos-body">
+      <p>Alle Preise werden beim Kauf klar ausgewiesen. Zahlungen werden sicher über <strong>Stripe</strong> verarbeitet.</p>
+      <ul>
+        <li>Gebühren sind im Voraus zu entrichten.</li>
+        <li>Einzelkurse sind einmalige Käufe mit lebenslangem Zugang.</li>
+        <li>Preise sind in Euro (€). Umrechnungsgebühren trägt der Karteninhaber.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">5</div>
+    <div class="tos-title">Geistiges Eigentum</div>
+    <div class="tos-body">
+      <p>Alle Inhalte — Videos, Serien, Kurse, Bilder, Texte — sind <strong>ausschließliches Eigentum von Yogi Khasha</strong> und urheberrechtlich geschützt.</p>
+      <ul>
+        <li>Kein Inhalt darf ohne schriftliche Genehmigung kopiert, verbreitet oder öffentlich angezeigt werden.</li>
+        <li>Deine Mitgliedschaft gewährt eine persönliche, nicht übertragbare Lizenz nur für privaten, nicht-kommerziellen Gebrauch.</li>
+        <li>Videos sind mit Mitglieder-Identitätsdaten gekennzeichnet. Unbefugte Verbreitung ist nachverfolgbar und führt zur sofortigen Kontosperrung.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">7</div>
+    <div class="tos-title">Datenschutz</div>
+    <div class="tos-body">
+      <p>Wir erheben nur notwendige Daten: Name, E-Mail und Zahlungsdaten (von Stripe verarbeitet — keine vollständigen Kartennummern gespeichert). Deine Daten werden nicht ohne Zustimmung verkauft oder weitergegeben.</p>
+      <p>Mehr Informationen in unserer <a href="privacy.html">Datenschutzrichtlinie</a>.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">8</div>
+    <div class="tos-title">Stornierungen und Rückerstattungen</div>
+    <div class="tos-body">
+      <p><strong>Mitgliedschaften:</strong> Jederzeit kündbar. Kündigung gilt ab Ende des aktuellen Zyklus. Keine Rückerstattung für bereits abgerechnete Zeiträume, außer innerhalb der 7-Tage-Garantie.</p>
+      <p><strong>Präsenzkurse:</strong> Volle Rückerstattung bei Stornierung mindestens <strong>24 Stunden vorher</strong>. Keine Rückerstattung bei späterer Stornierung.</p>
+      <p><strong>Online-Kurse und Einzelkäufe:</strong> Keine Rückerstattung nach Zugangsgewährung oder Kursbeginn.</p>
+      <p>Erstattungsanfragen: <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a></p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">9</div>
+    <div class="tos-title">Mitgliederverhalten</div>
+    <div class="tos-body">
+      <p>Ausdrücklich verboten: Kontodaten teilen, Inhalte aufzeichnen oder verbreiten, Schutzmaßnahmen umgehen, beleidigendes oder belästigendes Verhalten.</p>
+      <p>Verstöße können zur sofortigen Sperrung ohne Rückerstattung und zu rechtlichen Schritten führen.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="tos-section">
+    <div class="tos-num">10</div>
+    <div class="tos-title">Änderungen</div>
+    <div class="tos-body">
+      <p>Wir behalten uns das Recht vor, diese Bedingungen jederzeit zu aktualisieren. Wesentliche Änderungen werden aktiven Mitgliedern per E-Mail mitgeteilt. Durch die weitere Nutzung stimmst du den aktualisierten Bedingungen zu.</p>
+    </div>
+  </div>
+  <div class="signature">
+    <div class="sig-name">Yogi Khasha</div>
+    <div class="sig-title">Online Yoga &amp; Bewegungsplattform</div>
+    <div class="sig-contact">Fragen? <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a></div>
+  </div>
+</div>
+
 <script>
+const _tL=localStorage.getItem('yk_lang')||'en';
+['en','es','de'].forEach(l=>{const el=document.getElementById('t-'+l);if(el)el.style.display=l===_tL?'':'none';});
+function getUser(){try{return JSON.parse(localStorage.getItem('yk_user'));}catch(e){return null;}}
+function handleHamLogin(){const u=getUser();if(u){localStorage.removeItem('yk_user');location.reload();}else window.location.href='index.html';}
+function updateNav(){const u=getUser();const lt=document.getElementById('ham-login-txt');if(lt)lt.textContent=u?'Log Out':'Log In';}
 function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
 document.addEventListener('click',()=>document.getElementById('ham-drop').classList.remove('open'));
+updateNav();
 </script>
 <footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">

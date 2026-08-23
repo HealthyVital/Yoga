@@ -124,7 +124,6 @@
     <a href="practice.html" class="nav-link" data-i18n="nav-practice">Practice</a>
     <a href="courses.html" class="nav-link" data-i18n="nav-courses">Courses</a>
     <button class="btn-nav" id="nav-btn" onclick="showSignup()" data-i18n="nav-join-free">Join Free</button>
-    <select class="lang-select" onchange="setLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="es">ES</option></select>
     <div class="ham-wrap">
       <button class="nav-ham" id="ham-btn" onclick="toggleHam(event)">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -136,6 +135,7 @@
         <a href="mailto:Yogi_Khasha@proton.me" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><span data-i18n="nav-support">Support</span></a>
         <a href="privacy.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="nav-privacy">Privacy Policy</span></a>
         <a href="terms.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span data-i18n="nav-terms">Terms of Service</span></a>
+        <a href="about.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>About</span></a>
         <div class="ham-div"></div>
         <button class="ham-item" id="ham-login-btn" onclick="handleHamLogin()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg><span id="ham-login-txt" data-i18n="nav-login">Log In</span></button>
       </div>
@@ -331,7 +331,15 @@ function doSignup(){
   const fn=document.getElementById('su-fname').value.trim();
   const em=document.getElementById('su-email').value.trim();
   if(!fn||!em){alert('Please fill in all fields.');return;}
-  localStorage.setItem('yk_user',JSON.stringify({firstName:fn,email:em,isPremium:false,joinedAt:Date.now()}));
+  const user={firstName:fn,email:em,isPremium:false,joinedAt:Date.now()};
+  localStorage.setItem('yk_user',JSON.stringify(user));
+  try{
+    const subs=JSON.parse(localStorage.getItem('yk_subscribers')||'[]');
+    if(!subs.find(s=>s.email===em)){
+      subs.push({id:Date.now(),name:fn,email:em,plan:'free',status:'active',joinDate:new Date().toISOString().slice(0,10),notes:''});
+      localStorage.setItem('yk_subscribers',JSON.stringify(subs));
+    }
+  }catch(e){}
   hideSignup();
   window.location.href='practice.html';
 }
@@ -347,7 +355,7 @@ function handleHamLogin(){
 }
 function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
 document.addEventListener('click',function(){const d=document.getElementById('ham-drop');if(d)d.classList.remove('open')});
-updateNav();
+updateNav();applyLang();
 (function(){try{const si=JSON.parse(localStorage.getItem('yk_site_imgs')||'{}');
   if(si.p_hero){const h=document.querySelector('.hero');if(h)h.style.backgroundImage="url('"+si.p_hero+"')";}
   if(si.p_teacher){const t=document.getElementById('about-teacher-img');if(t)t.src=si.p_teacher;}

@@ -86,15 +86,15 @@
         <a href="mailto:Yogi_Khasha@proton.me" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
         <a href="privacy.html" class="ham-item" style="color:var(--p);font-weight:600"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
         <a href="terms.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
-        <a href="#" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <a href="about.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
         <div class="ham-div"></div>
-        <button class="ham-item" onclick="window.location.href='index.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Log In</button>
+        <button class="ham-item" id="ham-login-btn" onclick="handleHamLogin()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg><span id="ham-login-txt">Log In</span></button>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="page-wrap">
+<div class="page-wrap" id="t-en">
 
   <div class="page-eyebrow">Legal</div>
   <h1 class="page-title">Privacy Policy</h1>
@@ -271,9 +271,232 @@
 
 </div>
 
+<!-- =================== ESPAÑOL =================== -->
+<div class="page-wrap" id="t-es" style="display:none">
+  <div class="page-eyebrow">Legal</div>
+  <h1 class="page-title">Política de Privacidad</h1>
+  <div class="page-date">Última actualización: agosto 2026 &nbsp;·&nbsp; Yogi Khasha</div>
+  <div class="intro">Esta Política de Privacidad describe cómo Yogi Khasha recopila, usa y divulga tu información cuando usas nuestra plataforma. Al usar Yogi Khasha, aceptas la recopilación y uso de información conforme a esta política.</div>
+  <div class="pp-section">
+    <div class="pp-num">§</div>
+    <div class="pp-title">Interpretación y Definiciones</div>
+    <div class="pp-body">
+      <p>Los términos con mayúscula inicial tienen los significados definidos a continuación.</p>
+      <div class="def-grid">
+        <div class="def-row"><div class="def-term">Cuenta</div><div class="def-desc">Cuenta única creada para acceder a nuestro servicio.</div></div>
+        <div class="def-row"><div class="def-term">Empresa</div><div class="def-desc">Se refiere a Yogi Khasha, la plataforma online de bienestar. También denominada "Nosotros" o "Nuestro".</div></div>
+        <div class="def-row"><div class="def-term">Cookies</div><div class="def-desc">Pequeños archivos en tu dispositivo con detalles de navegación y preferencias.</div></div>
+        <div class="def-row"><div class="def-term">Dispositivo</div><div class="def-desc">Cualquier dispositivo que pueda acceder al servicio: computadora, celular o tablet.</div></div>
+        <div class="def-row"><div class="def-term">Datos Personales</div><div class="def-desc">Información que identifica o puede identificar a una persona.</div></div>
+        <div class="def-row"><div class="def-term">Servicio</div><div class="def-desc">La plataforma y sitio web de Yogi Khasha.</div></div>
+        <div class="def-row"><div class="def-term">Proveedor de Servicios</div><div class="def-desc">Terceros que procesan datos en nombre de Yogi Khasha (p.ej., Stripe para pagos).</div></div>
+        <div class="def-row"><div class="def-term">Tú</div><div class="def-desc">El individuo que accede o usa el servicio.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">1</div>
+    <div class="pp-title">Datos que Recopilamos</div>
+    <div class="pp-body">
+      <div class="pp-sub">Datos Personales</div>
+      <p>Al crear una cuenta o suscribirte, podemos recopilar: correo electrónico, nombre, información de pago (procesada por Stripe — no almacenamos números de tarjeta completos) y detalles del plan.</p>
+      <div class="pp-sub">Datos de Uso</div>
+      <p>Datos recopilados automáticamente: dirección IP, tipo de navegador, páginas visitadas, duración de visita y otros datos de diagnóstico.</p>
+      <div class="pp-sub">Datos de Interacción con Contenido</div>
+      <p>Registramos qué clases, series o cursos accedes y tu actividad de práctica para funciones como el sistema de Insignias.</p>
+      <div class="pp-sub">Cookies</div>
+      <p>Usamos cookies para mantener tu sesión y preferencias: cookies necesarias, de aceptación y de funcionalidad.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">2</div>
+    <div class="pp-title">Cómo Usamos tus Datos</div>
+    <div class="pp-body">
+      <ul>
+        <li>Proveer, operar y mantener la plataforma y tu membresía.</li>
+        <li>Gestionar tu cuenta y procesar pagos vía Stripe.</li>
+        <li>Contactarte sobre renovaciones, actualizaciones y avisos de seguridad.</li>
+        <li>Personalizar tu experiencia y rastrear el progreso de práctica (Insignias).</li>
+        <li>Analizar patrones de uso y mejorar la plataforma.</li>
+        <li>Proteger los derechos y la seguridad de los usuarios.</li>
+      </ul>
+      <div class="notice-box"><b>Marca de Agua en Contenido:</b> Los videos para miembros registrados contienen una marca de agua con el correo del miembro para identificar distribuciones no autorizadas. Al acceder al contenido premium, consientes este uso.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">3</div>
+    <div class="pp-title">Compartir tus Datos</div>
+    <div class="pp-body">
+      <p>No vendemos tus datos. Podemos compartirlos únicamente con proveedores de servicios (como Stripe), por exigencia legal, en caso de fusión o adquisición, o con tu consentimiento explícito.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">5</div>
+    <div class="pp-title">Retención y Transferencia de Datos</div>
+    <div class="pp-body">
+      <p>Conservamos tus datos solo el tiempo necesario. Al cerrar tu cuenta, los eliminaremos o anonimizaremos en un plazo razonable, salvo obligación legal. Tus datos pueden procesarse en servidores fuera de tu jurisdicción; tomamos medidas para garantizar su seguridad.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">6</div>
+    <div class="pp-title">Tus Derechos</div>
+    <div class="pp-body">
+      <p>Según tu ubicación, puedes tener derechos de: acceso, corrección, eliminación, objeción y portabilidad de tus datos. Escríbenos a <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a> — respondemos en 30 días.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">7</div>
+    <div class="pp-title">Privacidad de Menores</div>
+    <div class="pp-body">
+      <p>La plataforma no está dirigida a menores de 13 años. Si crees que tu hijo/a nos proporcionó datos, contáctanos en <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a> para eliminarlos.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">8</div>
+    <div class="pp-title">Seguridad</div>
+    <div class="pp-body">
+      <p>Los pagos se procesan exclusivamente a través de Stripe (cumple PCI-DSS). Usamos medidas administrativas, técnicas y físicas razonables para proteger tus datos. Ningún método en internet es 100% seguro.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">9</div>
+    <div class="pp-title">Cambios en esta Política</div>
+    <div class="pp-body">
+      <p>Podemos actualizar esta política periódicamente. Te notificaremos por correo ante cambios importantes. El uso continuado de la plataforma implica aceptación de la política actualizada.</p>
+    </div>
+  </div>
+  <div class="signature">
+    <div class="sig-name">Yogi Khasha</div>
+    <div class="sig-title">Plataforma Online de Yoga y Movimiento</div>
+    <div class="sig-contact">Preguntas o solicitudes de datos: <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a></div>
+  </div>
+</div>
+
+<!-- =================== DEUTSCH =================== -->
+<div class="page-wrap" id="t-de" style="display:none">
+  <div class="page-eyebrow">Rechtliches</div>
+  <h1 class="page-title">Datenschutzrichtlinie</h1>
+  <div class="page-date">Zuletzt aktualisiert: August 2026 &nbsp;·&nbsp; Yogi Khasha</div>
+  <div class="intro">Diese Datenschutzrichtlinie beschreibt, wie Yogi Khasha deine Informationen erhebt, verwendet und weitergibt. Durch die Nutzung von Yogi Khasha stimmst du der Erhebung und Verwendung von Informationen gemäß dieser Richtlinie zu.</div>
+  <div class="pp-section">
+    <div class="pp-num">§</div>
+    <div class="pp-title">Begriffsbestimmungen</div>
+    <div class="pp-body">
+      <div class="def-grid">
+        <div class="def-row"><div class="def-term">Konto</div><div class="def-desc">Ein einzigartiges Konto für den Zugang zum Dienst.</div></div>
+        <div class="def-row"><div class="def-term">Unternehmen</div><div class="def-desc">Bezieht sich auf Yogi Khasha, die Online-Wellness-Plattform. Auch als „Wir" bezeichnet.</div></div>
+        <div class="def-row"><div class="def-term">Cookies</div><div class="def-desc">Kleine Dateien auf deinem Gerät mit Browsing-Details und Einstellungen.</div></div>
+        <div class="def-row"><div class="def-term">Gerät</div><div class="def-desc">Jedes Gerät, das auf den Dienst zugreifen kann: Computer, Mobiltelefon oder Tablet.</div></div>
+        <div class="def-row"><div class="def-term">Personenbezogene Daten</div><div class="def-desc">Informationen, die eine identifizierbare Person betreffen.</div></div>
+        <div class="def-row"><div class="def-term">Dienst</div><div class="def-desc">Die Yogi Khasha Plattform und Website.</div></div>
+        <div class="def-row"><div class="def-term">Dienstleister</div><div class="def-desc">Dritte, die Daten im Auftrag von Yogi Khasha verarbeiten (z.B. Stripe).</div></div>
+        <div class="def-row"><div class="def-term">Du</div><div class="def-desc">Die Person, die auf den Dienst zugreift oder ihn nutzt.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">1</div>
+    <div class="pp-title">Daten, die wir erheben</div>
+    <div class="pp-body">
+      <div class="pp-sub">Personenbezogene Daten</div>
+      <p>Bei Kontoerstellung oder Abonnement erheben wir: E-Mail-Adresse, Namen, Zahlungsdaten (über Stripe verarbeitet — keine vollständigen Kartennummern gespeichert) und Abonnementdetails.</p>
+      <div class="pp-sub">Nutzungsdaten</div>
+      <p>Automatisch erfasste Daten: IP-Adresse, Browsertyp, besuchte Seiten, Besuchsdauer und weitere Diagnosedaten.</p>
+      <div class="pp-sub">Inhaltsinteraktionsdaten</div>
+      <p>Wir erfassen, auf welche Kurse oder Serien du zugreifst, und deine Übungsaktivität (z.B. für das Abzeichen-System).</p>
+      <div class="pp-sub">Cookies</div>
+      <p>Wir nutzen Cookies für Session-Management und Einstellungen: notwendige Cookies, Zustimmungs-Cookies und Funktions-Cookies.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">2</div>
+    <div class="pp-title">Verwendung deiner Daten</div>
+    <div class="pp-body">
+      <ul>
+        <li>Bereitstellung und Betrieb der Plattform und deiner Mitgliedschaft.</li>
+        <li>Kontoverwaltung und Zahlungsabwicklung über Stripe.</li>
+        <li>Benachrichtigungen über Verlängerungen, Updates und Sicherheitshinweise.</li>
+        <li>Personalisierung deiner Erfahrung und Fortschrittsverfolgung (Abzeichen).</li>
+        <li>Nutzungsanalyse und Plattformverbesserung.</li>
+        <li>Durchsetzung der Nutzungsbedingungen und Schutz der Sicherheit.</li>
+      </ul>
+      <div class="notice-box"><b>Wasserzeichen:</b> Videos enthalten ein Wasserzeichen mit der E-Mail-Adresse des Mitglieds zur Identifizierung unerlaubter Weitergabe. Durch den Zugang zu Premium-Inhalten stimmst du dieser Verwendung zu.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">3</div>
+    <div class="pp-title">Weitergabe deiner Daten</div>
+    <div class="pp-body">
+      <p>Wir verkaufen deine Daten nicht. Weitergabe erfolgt nur an Dienstleister (Stripe), auf gesetzliche Anforderung, bei Unternehmenstransaktionen oder mit deiner ausdrücklichen Zustimmung.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">5</div>
+    <div class="pp-title">Datenspeicherung und -übertragung</div>
+    <div class="pp-body">
+      <p>Wir speichern deine Daten nur so lange wie nötig. Nach Kontoschließung werden sie gelöscht oder anonymisiert, soweit nicht gesetzlich anders vorgeschrieben. Daten können auf Servern außerhalb deiner Gerichtsbarkeit verarbeitet werden; wir treffen geeignete Sicherheitsmaßnahmen.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">6</div>
+    <div class="pp-title">Deine Rechte</div>
+    <div class="pp-body">
+      <p>Je nach Standort hast du Rechte auf: Auskunft, Berichtigung, Löschung, Widerspruch und Datenportabilität. Kontaktiere uns unter <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a> — wir antworten innerhalb von 30 Tagen.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">7</div>
+    <div class="pp-title">Datenschutz für Minderjährige</div>
+    <div class="pp-body">
+      <p>Die Plattform richtet sich nicht an Kinder unter 13 Jahren. Wenn du glaubst, dass dein Kind uns Daten übermittelt hat, kontaktiere uns unter <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a>.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">8</div>
+    <div class="pp-title">Sicherheit</div>
+    <div class="pp-body">
+      <p>Zahlungen werden ausschließlich über Stripe (PCI-DSS-konform) verarbeitet. Wir setzen angemessene technische und organisatorische Maßnahmen ein, um deine Daten zu schützen. Keine Übertragung ist 100% sicher.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="pp-section">
+    <div class="pp-num">9</div>
+    <div class="pp-title">Änderungen dieser Richtlinie</div>
+    <div class="pp-body">
+      <p>Wir können diese Datenschutzrichtlinie aktualisieren. Wesentliche Änderungen werden per E-Mail mitgeteilt. Die weitere Nutzung der Plattform gilt als Zustimmung zur aktualisierten Richtlinie.</p>
+    </div>
+  </div>
+  <div class="signature">
+    <div class="sig-name">Yogi Khasha</div>
+    <div class="sig-title">Online Yoga &amp; Bewegungsplattform · yogikhasha.com</div>
+    <div class="sig-contact">Datenschutzfragen: <a href="mailto:Yogi_Khasha@proton.me">Yogi_Khasha@proton.me</a></div>
+  </div>
+</div>
+
 <script>
+const _pL=localStorage.getItem('yk_lang')||'en';
+['en','es','de'].forEach(l=>{const el=document.getElementById('t-'+l);if(el)el.style.display=l===_pL?'':'none';});
+function getUser(){try{return JSON.parse(localStorage.getItem('yk_user'));}catch(e){return null;}}
+function handleHamLogin(){const u=getUser();if(u){localStorage.removeItem('yk_user');location.reload();}else window.location.href='index.html';}
+function updateNav(){const u=getUser();const lt=document.getElementById('ham-login-txt');if(lt)lt.textContent=u?'Log Out':'Log In';}
 function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
 document.addEventListener('click',()=>document.getElementById('ham-drop').classList.remove('open'));
+updateNav();
 </script>
 <footer style="background:#1e3a8a;color:#fff;padding:28px 32px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">
