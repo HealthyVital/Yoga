@@ -113,7 +113,16 @@ const TRANSLATIONS = {
     'ny-modal-btn':'Get Annual Access',
     'ny-modal-tiny':'Annual commitment. 30-day money-back guarantee. No free trial.',
     'ny-sec-label':'Naked Yoga Classes',
-    'nav-back':'Back'
+    'nav-back':'Back',
+    'modal-member-greeting':'member',
+    'modal-premium-title':"You're already a Premium Member",
+    'modal-premium-msg':'You have full access to Yogi Khasha.',
+    'modal-view-content':'View my content →',
+    'modal-free-greeting':'Welcome back, ',
+    'modal-free-msg':'You already have a free Yogi Khasha account.',
+    'modal-go-content':'Go to my content →',
+    'modal-upgrade':'Upgrade to Premium →',
+    'alert-fill-fields':'Please fill in all fields.'
   },
   de: {
     'nav-practice':'Praxis','nav-courses':'Kurse','nav-join-free':'Kostenlos starten',
@@ -180,7 +189,7 @@ const TRANSLATIONS = {
     'btn-buy-now':'Jetzt kaufen','lbl-instant-access':'Sofortiger Zugang · Kein Abonnement',
     'lbl-course-content':'Kursinhalt','lbl-online-course':'Online-Kurs',
     'lbl-by':'Von',
-    'section-h1-main':'Die uralte Praxis mit 5 täglichen Bewegungen, die die Uhr Ihres Körpers zurückdreht — mehr Energie, weniger Schmerzen und eine Wirbelsäule, die sich 20 Jahre jünger anfühlt.',
+    'section-h1-main':'Die uralte Praxis mit 5 täglichen Bewegungen, die die Uhr deines Körpers zurückdreht — mehr Energie, weniger Schmerzen und eine Wirbelsäule, die sich 20 Jahre jünger anfühlt.',
     'about-body':"Mit über 21 Jahren Lehrerfahrung und Tausenden verwandelter Leben hat Yogi Khasha zwei Jahrzehnte damit verbracht, die alten Bewegungsabfolgen zu meistern, die die moderne Wissenschaft heute bestätigt: Fünf spezifische Bewegungen, täglich ausgeführt, die die natürlichen Verjüngungsmechanismen deines Körpers reaktivieren. Das ist keine Übung — es ist das kraftvollste Anti-Aging-Ritual, das dein Körper durchzuführen bestimmt war.",
     'quote-text':"''Ich hätte wirklich nicht geglaubt, dass eine tägliche Bewegungspraxis so viel verändern kann. Innerhalb von drei Wochen hatte ich die Steifheit verloren, die ich jahrelang mit mir getragen hatte, meine Energie war zurück, und die Leute fragten mich ständig, ob ich etwas geändert hätte. Die Antwort war genau das — fünf Bewegungen, jeden Morgen. Das war alles.''",
     'footer-tagline':'Mit ♥ auf dem Planeten Erde gemacht.',
@@ -222,7 +231,16 @@ const TRANSLATIONS = {
     'ny-modal-btn':'Jahreszugang erhalten',
     'ny-modal-tiny':'Jahresverpflichtung. 30-Tage-Geldback-Garantie. Keine kostenlose Testphase.',
     'ny-sec-label':'Naked Yoga Klassen',
-    'nav-back':'Zurück'
+    'nav-back':'Zurück',
+    'modal-member-greeting':'Mitglied',
+    'modal-premium-title':'Du bist bereits Premium-Mitglied',
+    'modal-premium-msg':'Du hast vollständigen Zugang zu Yogi Khasha.',
+    'modal-view-content':'Meine Inhalte ansehen →',
+    'modal-free-greeting':'Willkommen zurück, ',
+    'modal-free-msg':'Du hast bereits ein kostenloses Yogi Khasha Konto.',
+    'modal-go-content':'Zu meinen Inhalten →',
+    'modal-upgrade':'Auf Premium upgraden →',
+    'alert-fill-fields':'Bitte fülle alle Felder aus.'
   },
   es: {
     'nav-practice':'Práctica','nav-courses':'Cursos','nav-join-free':'Empieza Gratis',
@@ -331,7 +349,16 @@ const TRANSLATIONS = {
     'ny-modal-btn':'Obtener Acceso Anual',
     'ny-modal-tiny':'Compromiso anual. Garantía de devolución de 30 días. Sin periodo de prueba gratuito.',
     'ny-sec-label':'Clases de Yoga Desnudo',
-    'nav-back':'Volver'
+    'nav-back':'Volver',
+    'modal-member-greeting':'miembro',
+    'modal-premium-title':'Ya eres miembro Premium',
+    'modal-premium-msg':'Tienes acceso completo a Yogi Khasha.',
+    'modal-view-content':'Ver mi contenido →',
+    'modal-free-greeting':'Hola, ',
+    'modal-free-msg':'Ya tienes una cuenta gratuita en Yogi Khasha.',
+    'modal-go-content':'Ir a mi contenido →',
+    'modal-upgrade':'Actualizar a Premium →',
+    'alert-fill-fields':'Por favor, rellena todos los campos.'
   }
 };
 
